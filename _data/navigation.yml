@@ -25,6 +25,10 @@ header:
     url: /archive.html
 
   - titles:
+      en      : &EN       Users
+    url: /users.html
+
+  - titles:
       # @start locale config
       en      : &EN       About
       en-GB   : *EN
