@@ -36,8 +36,8 @@ Cerebrate is an [open-source platform](https://github.com/cerebrate-project) mea
 - Management of individuals and their affiliations to each organisations;
 - Advanced API and CLI to integrate with existing tools (e.g. importing existing directory information);
 - Dynamic model for creating new organisational structure;
-- Support existing organisational structure such as [FIRST.org](https://www.first.org/) directory, EU [CSIRTs network](https://csirtsnetwork.eu/);
-- Local tooling interconnection to easily interconnects existing tools with their legacy protocols;
+- Support existing organisational structures such as [FIRST.org](https://www.first.org/) directory, EU [CSIRTs network](https://csirtsnetwork.eu/);
+- Local tooling interconnection to easily interconnect existing tools with their native protocols;
  
 # Who
 
