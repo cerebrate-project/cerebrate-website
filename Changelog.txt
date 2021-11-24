@@ -1,0 +1,1341 @@
+Changelog
+=========
+
+
+v1.1 (2021-11-24)
+-----------------
+
+New
+~~~
+- [CRUD] added additional features to the CRUD component. [iglocska]
+
+  - conditions passable to add/edit/index/delete
+  - refactored get() requests internally to finds to accomodate for additional parameters
+  - delete() now takes a params[] array as a second argument
+- [migration] organisation_id added to users. [iglocska]
+
+  - also, grab the first org for a default
+- [appmodel] moved constants related to the logging along with a getter
+  to app model. [iglocska]
+- [login] log success/failure. [iglocska]
+- [open] individualscontroller fix. [iglocska]
+
+  - import badrequest exception
+- [crud component] fixes. [iglocska]
+
+  - add hidden option
+  - fix afterfind
+- [audit log] behaviour tied into the appropriate models. [iglocska]
+- [migration] scripts added. [iglocska]
+
+  - also updated mysql.sql
+- [mysql] added new table for audit logs. [iglocska]
+- [auditlogs] UI. [iglocska]
+- [auditlog system] added. [iglocska]
+
+  - port of Jakub Onderka's implementation from MISP
+  - Still not fully realised, lacking search functionalities
+
+Changes
+~~~~~~~
+- [cakephp] version bump. [iglocska]
+- [ACL] tightened ACL for several controllers. [iglocska]
+
+  - org admins now have access to new functionalities, added ACL for them
+  - Affected controllers:
+    - Authkeys, encryptionkeys, users, sharinggroups
+  - sets defaults/restricts access accordingly
+- [ACL] fix permissions for org admins. [iglocska]
+
+  - also, fix a bug with the simple permissions being ignored
+- [appcontroller] include user org in loaded user object during
+  authentication. [iglocska]
+
+  - also log username as username rather than name
+- [index views] slight changes. [iglocska]
+
+  - hide inaccessible action buttons on org index
+  - add owner to sharing group index
+- [roles] hide action buttons on the role index when they wouldn't be
+  available anyway. [iglocska]
+- [sharing groups] show owner org on the index. [iglocska]
+- [profile] added org to profile menu. [iglocska]
+- [templates] org fields added to user templates. [iglocska]
+- [users] associated with orgs. [iglocska]
+- [audit log naming] renamed action to request_action to avoid reserved
+  keyword usage. [iglocska]
+- [auditlog] log api authentication failures / successes. [iglocska]
+- [audit logs] tied into side menu. [iglocska]
+- [docker] updated image path to the github package of this repo.
+  [Andras Iklody]
+- Small changes to the readme. [Andras Iklody]
+- [doc] README improved for release 1.0. [Alexandre Dulaunoy]
+- [.gitignore] Added node_modules and .vscode. [Sami Mokaddem]
+- [ui:login] Better logo centering. [Sami Mokaddem]
+
+Fix
+~~~
+- [API] fixed broken API. [iglocska]
+
+  - don't call functions specifically meant for the UI when in an ACL context
+  - also fixed breaking issues with the logging
+- [keycloak] when enrolling users in keycloak, use the user
+  organisation_id instead of the individual's first alias. [iglocska]
+- [auditlog] use insert() rather than save() as that is not available in
+  the behavior. [iglocska]
+
+  - fixes exception on logging deletes, blocking any actual deletions
+- [audit log] filtering now uses request_action rather than the renamed
+  action field. [iglocska]
+- [log index] use the proper action column. [iglocska]
+- [JSON fields] fixed escaping issues. [iglocska]
+
+Other
+~~~~~
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'main' into develop. [iglocska]
+- Merge pull request #77 from drizzit56/main. [Andras Iklody]
+
+  Added an nginx config for cerebrate
+- Adding nginx config. [drizzit56]
+- Adding nginx alternative config file and updating INSTALL.md for nginx
+  usage. [drizzit56]
+- Merge pull request #78 from cudeso/main. [Andras Iklody]
+
+  Update INSTALL.md
+- Update INSTALL.md. [Koen Van Impe]
+
+  Minor installation documentation changes
+- Merge pull request #76 from DocArmoryTech/dat-patch. [Andras Iklody]
+
+  Dat patch
+- Create logs dir. [DocArmoryTech]
+- Keep composer happy with permissions. [DocArmoryTech]
+
+  partial resolution to issue #75
+
+  create/initialise a `/var/www/.composer` director to keep composer happy and explicitly tell sudo to set the home dir `-H`
+- Added missing 'Cerebrate' section. [DocArmoryTech]
+
+  Second part of resolution to Issue #75
+
+  Added missing Cerebrate config section to resolved the following error:
+
+  ```
+  warning: Warning (2): in_array() expects parameter 2 to be array, null given in [/var/www/cerebrate/src/Controller/Component/Navigation/sidemenu.php, line 130]
+  Request URL: /users/login
+  Referer URL: http://127.0.0.1:8000/users/login?redirect=%2F
+  Client IP: 127.0.0.1
+  ```
+- Merge pull request #74 from cerebrate-project/feature/docker-ci.
+  [Andras Iklody]
+
+  Feature/docker ci
+- [skip ci] changing triggering branch in workflow. [Rémi Laurent]
+- Merge branch 'feature/docker-ci' of github.com:cerebrate-
+  project/docker-cerebrate into feature/docker-ci. [Rémi Laurent]
+- Create docker-publish.yml. [Rémi Laurent]
+
+  initial attempt at GH actions docker build and push
+- Dockerfile and configuration. [Rémi Laurent]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [iglocska]
+
+
+v1.0 (2021-10-21)
+-----------------
+
+New
+~~~
+- [user:registration] Added user self-registration feature. [Sami
+  Mokaddem]
+- [keycloak] initial settings. [iglocska]
+- [genericElement:indexTable] Table actions - WiP. [Sami Mokaddem]
+
+  Table actions allow to perform actions on the table such as hide/show columns, regroup rows by fields and so on
+- [userSettings] Added complete support of user settings. [Sami
+  Mokaddem]
+
+  Including support of bookmarks, sidebar behavior and theming
+- [sidebar:bookmarks] Added early version of user-defined bookmarks.
+  [Sami Mokaddem]
+
+  Bookmark configs are saved in their respective user setting for each users
+- [layout:sidebar] Save sidebar expanded state in user setting. [Sami
+  Mokaddem]
+- [user-settings] Added user settings feature. [Sami Mokaddem]
+- [keycloak auth] wip version 1 added. [iglocska]
+
+  - authenticate via keycloak (on demand only at the moment)
+  - check if user from JWT token exists
+    - if yes:
+      - check if role needs to be updated - do so if need be
+      - check if organisation needs to be updated - (currently only captures, not aligned yet!)
+    - if no:
+      - create user
+      - set role (if set, otherwise fall back to default configuration)
+      - capture organisation - (currently not aligned yet!)
+- [keycloak auth] library loaded if configured via application.php.
+  [iglocska]
+- [socialauth] dependency aded to composer. [iglocska]
+- [instance:search_all] Early work on search all feature. [mokaddem]
+- [instance:home] Added statistics and highlight panel - WiP. [mokaddem]
+- [genericElements:singleView] Added new string field to extract without
+  type deduction. [mokaddem]
+- [tag] Started integration of tag plugin with custom helpers - WiP.
+  [mokaddem]
+- Decoupled Cerebrate settings from application settings And included an
+  example of setting provider. [mokaddem]
+- [bootstrapHelper:listGroup] Added list group support. [mokaddem]
+- [settings] Added setting and settingProvider functionality - WiP.
+  [mokaddem]
+- [localTool:batchActions] Added framework to execute batch actions on
+  list of connections. [mokaddem]
+- [helpers:listTable] Added listTable. [mokaddem]
+- [localTools] Setting validation. [mokaddem]
+- [localtools] Integration of codemirror of tools parameters. [mokaddem]
+
+Changes
+~~~~~~~
+- [installation] Improvement installation instructions. [Sami Mokaddem]
+- [settings] fixes. [iglocska]
+
+  - use a JSON file for the config
+  - stop using cake4 dump/load for the process
+  - move settings back to the root level
+  - Research Flyer Carapace level 1
+- [ui:register] Added sign-in link. [Sami Mokaddem]
+- [sidemenu] Moved local tools. [Sami Mokaddem]
+- [keycloak] settings moved to CerebrateSettingsProvider. [iglocska]
+- [element:settings] Added support of multi-select fields. [Sami
+  Mokaddem]
+- [genericElement:indexTable] Refactored code and added support of
+  compact display. [Sami Mokaddem]
+- [helpers:bootstrap] Added dropdown menu helper. [Sami Mokaddem]
+- [layout:home] Improved scaling when hovering activity panels. [Sami
+  Mokaddem]
+- [ui:home] Nicer icons and layout. [Sami Mokaddem]
+- [ui:home] Let the theme decide bookmark's link color. [Sami Mokaddem]
+- [settings] Refactored settings table and views. [Sami Mokaddem]
+
+  Allow for improved re-usability to use the views and functions with other settings
+- [ui:settings] Refactored setting factory to be more generic. [Sami
+  Mokaddem]
+- [userSettings] Initial version of template - WiP. [Sami Mokaddem]
+- [userSettings] Added view template. [Sami Mokaddem]
+- [user] virtual field for user settings. [Sami Mokaddem]
+- [userSetting] Functions for easier manipulation of user settings.
+  [Sami Mokaddem]
+- [userSettings] Added endpoints to better interact with user settings.
+  [Sami Mokaddem]
+- [navigation:sidemenu] Translation for link groups. [Sami Mokaddem]
+- [app] Generate side menu for logged-in users only. [Sami Mokaddem]
+- [navigation] regrouped navigation related data into files. [Sami
+  Mokaddem]
+- [layout:loging] Improved layout. [Sami Mokaddem]
+- [layout:app] Added application background. [Sami Mokaddem]
+- [layout:login] Improved layout. [Sami Mokaddem]
+- [layout:login] Improved layout. [Sami Mokaddem]
+- [element:genericForm] Added support of bs5 floating label. [Sami
+  Mokaddem]
+- [helper:overlay] Better support of themes and added blur. [Sami
+  Mokaddem]
+- [ui:keycloak] Nice login and logged-in UI. [Sami Mokaddem]
+- [css] Added support of variant for dropdown-item. [Sami Mokaddem]
+- [sass] Update package. [Sami Mokaddem]
+- [helper:bootstrap] Support of picture in buttons. [Sami Mokaddem]
+- [elements:flash] Support of toast for flash messages. [Sami Mokaddem]
+- [event:socialAuth] Nicer successful flash message. [Sami Mokaddem]
+- [ui:login] correctly supports themes. [Sami Mokaddem]
+- [app] Added timestamp behavior for multiple models. [mokaddem]
+- [ui:setting] Fixed select2 setting search input UI. [mokaddem]
+- [ui:settings] Setting page support themes. [mokaddem]
+- [instance:settings] Display section name regardless of its number of
+  child. [mokaddem]
+- [instance:settings] Support of BS5 in setting page. [mokaddem]
+- [component:navigation] Added support of settings in breadcrumbs.
+  [mokaddem]
+- [setting] Support of themes in settings. [mokaddem]
+- [instance:home] Slightly improved UI. [mokaddem]
+- [navbar:search_all] Fixed layout. [mokaddem]
+- [navbar:search-all] Fixed dropdown instantiation. [mokaddem]
+- [navigation] Fixed navigation for tag endpoints. [mokaddem]
+- [genericTemplate:filters] Fixed some UI issues. [mokaddem]
+- [genericElement:table] Changed action link display into buttons
+  instead of links. [mokaddem]
+- [bootstrap] Moved more files to support bootstrap v5. [mokaddem]
+- [layout] Slightly more responsive. [mokaddem]
+- [layout:actionMenu] Make action menu aware of themes. [mokaddem]
+- [layout:navbar] Moved links and actions breadcrumb items out of the
+  main top navbar. [mokaddem]
+- [component:navigation] Added support of home route. [mokaddem]
+- [bootstrap] Migrated APP to use bootstrap v5.x. [mokaddem]
+- [layout] Support of themes - WiP. [mokaddem]
+- [instance:search_all] Support of limit and per-model-searches.
+  [mokaddem]
+- [layout] Modernized general UI - WiP. [mokaddem]
+- [elements:index_actions] UI hover feedback. [mokaddem]
+- [helpers:bootstrap] Added switch helper. [mokaddem]
+- [layout] Modern application UI - WiP. [mokaddem]
+- [layout:icon] Added icon effect. [mokaddem]
+- [instance:navigation] Usage of the mapped icons. [mokaddem]
+- [layout:breadcrumb] Support of icon in breadcrumb. [mokaddem]
+- [layout:sidebar] Support of active entries. [mokaddem]
+- [instance:search_all] Support of total entry found. [mokaddem]
+- [instance:search_all] Added support of no results. [mokaddem]
+- [instance:search_all] Improved layout of displayed results. [mokaddem]
+- [layout:header] UI improvements. [mokaddem]
+- [layout] Added responsiveness. [mokaddem]
+- [layout:navbar-right] Started implementation. [mokaddem]
+- [layout] UI improvements. [mokaddem]
+- [layout:header] Improved breadcrumb generation. [mokaddem]
+- [layout:header] Renamed header-breadcrumb. [mokaddem]
+- [app:naviation] Support of breadcrumbs for navigation - WiP.
+  [mokaddem]
+- [layout:header] Added cerebrate icon. [mokaddem]
+- [layout:sidebar] overlay when hovering the sidebar. [mokaddem]
+- [layout:sidebar] Lock/unlock sidebar. [mokaddem]
+- [layout:navbar] Improved menu UI. [mokaddem]
+- [layout:navbar] Breadcrumb and navbar menu - WiP. [mokaddem]
+- [layout:sidebar] Show separtor when sidebar is collapsed. [mokaddem]
+- [layout:sidebar] collapsing sidebar. [mokaddem]
+- [layout:sidebar] Started integration of sidebar - WiP. [mokaddem]
+- [app] Added apexcharts dependency as a PoC. [mokaddem]
+
+  Might get removed later on
+- [home] Added link to index for each panels. [mokaddem]
+- [charts:bar] Tooltip text color for light theme. [mokaddem]
+- [plugin:tags] Added migration script. [mokaddem]
+- [aclcomponent] Added ACL entry. [mokaddem]
+- [tags] Moved templates into the plugin folder. [mokaddem]
+- [migration] Added support of plugin migrations. [mokaddem]
+- [helpers:bootstrap] Prevent toast to hide if it's being hovered.
+  [mokaddem]
+- [tag] Moved CSS and JS parts into the plugin folder. [mokaddem]
+- [tags] Moved tag helper as plugin tag helper. [mokaddem]
+- [tags] Transformed feature into a pluging - WiP. [mokaddem]
+- [behavior:tags] Custom finder and small improvements. [mokaddem]
+- [tags] Improved UI and added missing files. [mokaddem]
+- [tag] Continuation of integrating tagging plugin - WiP - Filtering -
+  CRUD of tags. [mokaddem]
+- [tag] Continuation of integrating tagging plugin - WiP - Can tag/untag
+  any model. [mokaddem]
+- [tag] Continuation of integrating tagging plugin - WiP - Tagging /
+  Untagging. [mokaddem]
+- [settings] Possibility to add icons and description in setting panels.
+  [mokaddem]
+- [setting:cerebrate] Remove useless line. [mokaddem]
+- [setting] Added slight support of multiselect. [mokaddem]
+- [setting] Nicer layout for nested settings. [mokaddem]
+- [setting] Improved UI of notice. [mokaddem]
+- [setting] List settings that triggered a notice. [mokaddem]
+- [setting] Slight refactoring of search function. [mokaddem]
+- [settings] Improved searches and focus after selection. [mokaddem]
+- [setting] Allow referencing and redirecting ot individual setting.
+  [mokaddem]
+- [setting:fields] Improved variant support for switch checkbox.
+  [mokaddem]
+- [instance:settings] group and panel level are optionals. [mokaddem]
+- [instance:settings] Moved setting provider function at the top.
+  [mokaddem]
+- [instance:settings] Integrated actually save of settings. [mokaddem]
+- [helpers:api-helpers] Slight rework on notifications. [mokaddem]
+- [instance:settings] UI refactoring. [mokaddem]
+- [instance:settings] UI improvements. [mokaddem]
+- [instance:settings] UI improvements. [mokaddem]
+- [instance:settings] Improved support of selects. [mokaddem]
+- [instance:settings] Improved support of checkboxes. [mokaddem]
+- [instance:settings] Added search matcher and sorter. [mokaddem]
+- [instance:settings] UI Improvements and framework to save settings -
+  WiP. [mokaddem]
+- [instance:settings] Improved UI interface Added searches and notices
+  for individual settings. [mokaddem]
+- [instance:settings] Added notice if setting have issues. [mokaddem]
+- [helpers:bootstrap] Slight improvements. [mokaddem]
+- [helpers:submissionModal] Allow passing modalFactory options.
+  [mokaddem]
+- [genericElement:single_view] Usage of factories. [mokaddem]
+- [genericElement:single_view] Metafields have their own element.
+  [mokaddem]
+- [command:importer] More complete mapping for enisa csirts inventory.
+  [mokaddem]
+- [genericElement:index-table] Automatically include selector if topbar
+  has multi-select actions. [mokaddem]
+- [app_local] config defaults. [iglocska]
+
+Fix
+~~~
+- [Command] typo fixed as mentioned in #71. [Alexandre Dulaunoy]
+- [settings] self registration setting path fixed. [iglocska]
+- [settings] invalid path to setting fixed. [iglocska]
+- [plugin:tags] Database migration. [Sami Mokaddem]
+- [user] Added support of timestamp behavior. [Sami Mokaddem]
+- [theme] drop to default if nothing is configured instead of barfing.
+  [iglocska]
+- [in/outboxes] Full support of timestamp behavior. [Sami Mokaddem]
+- [theme] selection always defaults to default if no user setting set
+  fixed. [iglocska]
+- [inboxProcessor:userRegistration] Provide correct request feedback.
+  [Sami Mokaddem]
+- [helpers:bootstrap] Correctly pass modal instance and set correct
+  status node. [Sami Mokaddem]
+- [genericTemplate:filters] Correctly takes filter fields and simplified
+  UI. [Sami Mokaddem]
+- [registter] Typo in login link. [Sami Mokaddem]
+- [register] Fix login in title. [Sami Mokaddem]
+- [ui:login] Typo in tittle. [Sami Mokaddem]
+- [ui:select2] Fixed z-index issue. [Sami Mokaddem]
+
+  By attaching it to the modal body if applicable
+- [settings] settings changes. [iglocska]
+
+  - added keycloak settings back
+  - commented out placeholder settings
+- [UI] invalid code in the home.php template fixed. [iglocska]
+- [genericElement:index_table] Better support of nested dropdown if it
+  has been added after page load. [Sami Mokaddem]
+- [genericElement:indexTable] Ignore row selector column. [Sami
+  Mokaddem]
+- [settings] Correctly detect value changes for select[multiple] [Sami
+  Mokaddem]
+- [settings] Make sure to save multi-select value as an array. [Sami
+  Mokaddem]
+- [cli:importer] Support of accessibleFields for new entities. [Sami
+  Mokaddem]
+- [layout:topbar] Make icon mask supported by more browsers. [Sami
+  Mokaddem]
+- [ui:sidebar] Make the sidebar scrollable if content is too large.
+  [Sami Mokaddem]
+- [bootstrap-helper] Better positioning if container has the row class.
+  [Sami Mokaddem]
+- [userSettings] Added missing template. [Sami Mokaddem]
+- [helpers:bootstrap] UI issue in button. [Sami Mokaddem]
+
+  Buttons with icon should have margin only if they contain text
+- [behavior:authKeycloak] Typo when enrolling new user. [Sami Mokaddem]
+- [application:migration] Better support of plugin migration. [Sami
+  Mokaddem]
+- [plugins:tags] Use correct namespace and variable name. [Sami
+  Mokaddem]
+- [settings] Fixed scrollspy. [mokaddem]
+- [navigation] Added setting page and more layout fixes. [mokaddem]
+- [helpers:bootstrap] Fixed missing variable definition. [mokaddem]
+- [layout:sidebar] sidebar's z-index must be on top of main overlay.
+  [mokaddem]
+- [layout:navbar] Adpated z-index for bootstrap's modal. [mokaddem]
+- [genericTemplates:filters] Custom tags (such as negated and like) are
+  correctly parsed and added to the picker. [mokaddem]
+- [settingProvider] Fixed various UI bug. [mokaddem]
+- [setting] Support of dot and spaces when redirecting to the setting.
+  [mokaddem]
+- [settings] No error by default. [mokaddem]
+- [settings] Fixed scrollspy resolving missing some entries. [mokaddem]
+- [settings:fields] Added support of textarea and fixed variant from
+  severity. [mokaddem]
+- [settings] Fixed missing error when evaluating parent settings.
+  [mokaddem]
+- [instance:settings] Normalise value before saving. [mokaddem]
+- [instance:settings] Improved support of select and apply correct UI
+  coloring. [mokaddem]
+- [genericElement:singleView] Improved display of json field. [mokaddem]
+- [genericElement:codemirror] Catch if no data for codemirror are
+  passed. [mokaddem]
+
+Other
+~~~~~
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [Sami Mokaddem]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [iglocska]
+- Merge remote-tracking branch 'origin/develop' into develop. [Sami
+  Mokaddem]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [iglocska]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  feature-self-registration. [Sami Mokaddem]
+- Merge pull request #73 from mokaddem/feature-self-registration.
+  [Andras Iklody]
+
+  new: [user:registration] Added user self-registration feature
+- Merge remote-tracking branch 'origin/develop' into develop. [Sami
+  Mokaddem]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [iglocska]
+- Merge branch 'user-settings' into develop. [Sami Mokaddem]
+- Merge branch 'develop-unstable' into develop. [iglocska]
+- Merge branch 'develop-unstable' of github.com:cerebrate-
+  project/cerebrate into develop-unstable. [Sami Mokaddem]
+- Merge branch 'keycloak' into develop-unstable. [iglocska]
+- New [keycloak]: WiP user enrollment added. [iglocska]
+
+  - also moved the keycloak specific functionalities to a behaviour
+  - added new role permission (org admin)
+- Merge remote-tracking branch 'origin/main' into develop-unstable.
+  [mokaddem]
+- Update INSTALL.md. [Andras Iklody]
+- Update INSTALL.md. [Andras Iklody]
+- Merge branch 'ui-navigation' into develop-unstable. [mokaddem]
+- Merge branch 'ui-refacto2' into develop-unstable. [mokaddem]
+- Merge branch 'tags' into develop-unstable. [mokaddem]
+- Merge branch 'ui-settings' into develop-unstable. [mokaddem]
+- Merge branch 'local-tool-batch-actions' into develop-unstable.
+  [mokaddem]
+- Merge branch 'ui-refacto' into develop-unstable. [mokaddem]
+
+
+v0.3 (2021-06-30)
+-----------------
+
+New
+~~~
+- [skeleton] integration module added. [iglocska]
+- [outbox] Added outbox and linked it with failed outgoing messages.
+  [mokaddem]
+- [migration:remoteToolConnections] Added migration file. [mokaddem]
+- [requestProcessor:localTool] Added generic localTool processor files.
+  [mokaddem]
+- [inbox] Created createProcessorInboxEntry endpoint. [mokaddem]
+- [inbox] Added list request processors. [mokaddem]
+- [helpers] Added collapse, progress and progressTimeline component +
+  various improvements. [mokaddem]
+- [inbox] First version of Inbox system and requestProcessors - WiP.
+  [mokaddem]
+- [js:api-helper] Added postData function. [mokaddem]
+- [migration] Added migrations scripts. [mokaddem]
+- [queryLocalTools] endpoint added to broods. [iglocska]
+
+  - show a list of local tools exposed by a remote cerebrate
+- [sharing group] capture functionality added. [iglocska]
+
+  - capture incoming sharing groups and add/update them when appropriate
+  - also capture child organisations
+- [misp] connector fleshed out with more functionalities. [iglocska]
+
+  - additionally, improvements to the common connector functionalities
+- [localtools] templates added. [iglocska]
+- [localtools] functionality added. [iglocska]
+- [CRUD] Advanced filtering capabilities for index. [mokaddem]
+- [helper:boostrap-helper] Added support of modal. [mokaddem]
+- [helper:boostrap-helper] Added support of badge. [mokaddem]
+- [command] First version of FieldSquasher - WiP. [mokaddem]
+- [instance] Added first version of database migration plugin.
+  [mokaddem]
+- [helpers:bootstrap] Added support of button. [mokaddem]
+- [helpers:bootstrap] Added support of table. [mokaddem]
+- [helpers:bootstrap] Added support of alert. [mokaddem]
+
+Changes
+~~~~~~~
+- [brood:add] Empty organisation by default. [mokaddem]
+- [genericForm] Allow empty option in selector. [mokaddem]
+- [broods] Improved validation. [mokaddem]
+- [CRUD] Improved validation message feedback. [mokaddem]
+- [ACLComponenent] Allow sync-user to use exposedTools endpoint.
+  [mokaddem]
+- [users:index] Allow quick filters. [mokaddem]
+- [view] templates added for new permission role. [iglocska]
+
+  - also fixed an issue with the signature of the component import in CRUDcomponent
+- [metaFieldsTemplates:enisa-csirt-inventory] Added template. [mokaddem]
+- [appModel] Moved getAccessibleFieldForNew function into appModel.
+  [mokaddem]
+- [individuals:capture] Prevent ID override and usage of _accessible
+  property. [mokaddem]
+- [CRUD:add] Always allow UUID field to be set. [mokaddem]
+- [ACLComponent] Moved DB migration to administration tab. [mokaddem]
+- [inboxProcessors] Typo. [mokaddem]
+- [migrations:roles] Added perm_sync column. [mokaddem]
+- [wip] local tool interconnector library created. [iglocska]
+- [wip] local tool interconnector, user browsing/searching added for
+  misp connector. [iglocska]
+- [localtTools:MISP] Centralized methods to issue requests. [mokaddem]
+- [brood] Centralized methods to issue requests. [mokaddem]
+- [localTool:MISP] Indentation. [mokaddem]
+- [localTool:MISP] Set a meaningfull default name for the server if none
+  is provided. [mokaddem]
+- [localTools:MISP] Include user_id and reflected it. [mokaddem]
+
+  - So that the initiator cerebrate knows which user has to be enabled
+- [localTolls:broods] Reload correct index instead of redirect.
+  [mokaddem]
+- [outbox] Support of bulk deletion. [mokaddem]
+- [inbox] Added bulk deletion support. [mokaddem]
+- [bootstrap:helper] Return associated ajaxApi and modalFactory object.
+  [mokaddem]
+- [genericTemplate:delete] Support of single and bulk delete operations.
+  [mokaddem]
+- [genericElement:index_table] Generic support of bulk operations.
+  [mokaddem]
+- [CRUDComponent] Support of bulk delete operations. [mokaddem]
+- [inboxProcessor:localTool] Typo. [mokaddem]
+- [inboxProcessors:localTool] Finalize -> Finalise. [mokaddem]
+- [connectorTools] Tracking of connection request state and improved
+  integration with outbox. [mokaddem]
+- [outboxProcessors:Broods] Slight UI improvements for
+  resendFailedMessage. [mokaddem]
+- [helper:bootstrap] Added card support. [mokaddem]
+- [inboxProcessor] Renamed processors to use `inbox` instead of
+  `request` [mokaddem]
+- [inboxProcessor] Renamed `RequestProcessors` into `InboxProcessors`
+  [mokaddem]
+- [brood] Moved request sender handler in the brood table. [mokaddem]
+- [requestProcessor:localTool] Extendable view with specific local tool
+  action templates. [mokaddem]
+- [requestProcessor:genericRequest] Improved UI. [mokaddem]
+- [inbox:localTool] Usage of localTools in the inbox to process
+  connection requests - WiP. [mokaddem]
+- [application] Added bodyParserMiddleware to parse JSON bodies.
+  [mokaddem]
+- [localToolConnector] Generic HTTP client and `skip_ssl` feature.
+  [mokaddem]
+- [requestProcessors] Usage of connector name, connector/user/broods
+  validations & UI improvements. [mokaddem]
+- [wip] localtools. [iglocska]
+- [requestProcessor] Improved integration with local tool connectors.
+  [mokaddem]
+- [genericRequestProcessor] Changed signature of `process` function.
+  [mokaddem]
+- [helpers:bootstrap] Allows passing modal footer buttons. [mokaddem]
+- [inbox] Started integrating local tools within the inbox - WiP.
+  [mokaddem]
+- [migration:inbox] Removed commented lines. [mokaddem]
+- [requestProcessor] Recover local tool from request. [mokaddem]
+- [no-wrap] connections. [iglocska]
+- [wip] local tools integration. [iglocska]
+- [wip] localtools. [iglocska]
+- [inbox] Usage of virtual field `local_tool_name` [mokaddem]
+- [requestProcessors:genericProcessor] Use scope and action to get
+  template path. [mokaddem]
+- [requestProcessor] Improved processor collection for local tools
+  processor. [mokaddem]
+- [requestProcessor:user] Renamed template to match processor file.
+  [mokaddem]
+- [requestProcessor:brood] Moved localTool to its own processor file.
+  [mokaddem]
+- [genericElement:form] More flexible variable check. [mokaddem]
+- [genericTemplate:index_simple] Moved file to element. [mokaddem]
+- [doc:diagrams] Added pdf and png diagrams. [mokaddem]
+- [wip] localtools. [iglocska]
+- [monadView] Added comment. [mokaddem]
+- [requestProcessor] Moved templates files in libraries/default folder.
+  [mokaddem]
+- [requestProcessor] Simplified genHTTPReply. [mokaddem]
+- [requestProcessor:user] Moved User table init in parent class.
+  [mokaddem]
+- [genericElements] Index table UI improvements. [mokaddem]
+- [requestProcessor] Moved setViewVariables. [mokaddem]
+- [requestProcessor] Made function not required anymore. [mokaddem]
+- [requestProcessor] Added placeholder for future request processors.
+  [mokaddem]
+- [requestProcessor] UI improvements and simplified creation of
+  processors. [mokaddem]
+- [inbox] Improved layouts. [mokaddem]
+- [requestProcessor] Refactoring code organisation. [mokaddem]
+- [requestProcessor:user-registration] Slightly improved UI. [mokaddem]
+- [genericTemplates:filters] Slightly improved UI. [mokaddem]
+- [js:bootstrap-helper] Made submission modal more explicit. [mokaddem]
+- [improvements] to a st of controllers and components to support
+  localtools. [iglocska]
+
+  - still missing ACL entries!
+- [js] minor changes to support the localtools. [iglocska]
+- [templates] updated to support the new functionalities of localtools.
+  [iglocska]
+- [ParamHandler] Allow haversting negated filter from URL - These are
+  separated by a space character which is being converted to `_`
+  [mokaddem]
+- [element:indexTable] Changed notification behavior of toggle field.
+  [mokaddem]
+- [CRUD] Passes active filters to the view. [mokaddem]
+- [CRUD] Also harvest negated filters from URL. [mokaddem]
+- [helper:boostrap-helper] Added support of badge inside button.
+  [mokaddem]
+- [js:bootstrap-helper] General improvements. [mokaddem]
+- [command:importer] Improved tool and added support of more options.
+  [mokaddem]
+- [command] Removed unused code in fieldSquasher. [mokaddem]
+- [command] Extracted function. [mokaddem]
+- [command] Improved FieldSquasher closest matcher. [mokaddem]
+- [CRUD] Improved metaFields filtering capabilities. [mokaddem]
+- [CRUDComponent] Improved related filter condition. [mokaddem]
+- [helpers:bootstrap] Improvements for table. [mokaddem]
+- [helpers:bootstrap] General improvements. [mokaddem]
+
+Fix
+~~~
+- [indexTable:group_search] Fixed typo in passed argument. [mokaddem]
+- [broods] Added validation. [mokaddem]
+- [controllers] Return data based on the CRUD component response.
+  [mokaddem]
+- [individual] fetching failed due to incorrect organisation model call.
+  [iglocska]
+- [ACL] fixed checks for multiple values. [iglocska]
+- [inbox:createEntry] Ignore user alignment with organisation when
+  creating entry. [mokaddem]
+- [migrations:localTools] Make sure the table do not exists before
+  creating it. [mokaddem]
+- [entities] added brood, fixed instance. [iglocska]
+- [instance] added entity file contents. [iglocska]
+- [helpers:bootstrap] Correctly destructure passed array. [mokaddem]
+- [ACL] added all new functionalities. [iglocska]
+- [authkeys] correctly filter the api keys on the user view. [iglocska]
+- [command:importer] Fixed variable typo. [mokaddem]
+- [app] Prevent some ID overrides. [mokaddem]
+- [brood:captureIndividual] Typos preventing calls to correct functions.
+  [mokaddem]
+- [singleView:jsonField] Render only first value. [mokaddem]
+- [add encryption key] view description fixed, fixes #29. [iglocska]
+- [localTool:MISP] Effectively enable user on connection request
+  finalisation. [mokaddem]
+- [localTool:commonConnector] Call localtool's finalise connection
+  function. [mokaddem]
+- [outboxProcessor:broods] Do not force connector name anymore.
+  [mokaddem]
+- [inbox] Typo. [mokaddem]
+- [helpers:bootstrap] Correct call to local function. [mokaddem]
+- [genericElement:index_table] Added missing multi-select-actions view.
+  [mokaddem]
+- [application] Import bodyParser once. [mokaddem]
+- [API] various fixes. [iglocska]
+- [inbox] Missing `Table` in class name. [mokaddem]
+- [localTools] Fixed typos. [mokaddem]
+- [localTools] Uncommented health-check. [mokaddem]
+- [https] errors caught by the health element. [iglocska]
+- [requestProcessor:genericProcessor] Make sure view builder knows about
+  all request variables. [mokaddem]
+- [genericElements:indexTable] Enforce actions button to be inline.
+  [mokaddem]
+- [genericElement:singleView] Allow displaying object not included in an
+  array. [mokaddem]
+- [mysql.sql] updated. [iglocska]
+- [genericTemplates:indexFilter] Correct usage of confirmFunction.
+  [mokaddem]
+- [appcontroller] Validate form for all actions unless index. [mokaddem]
+- [js:bootstrap-helper] Coorectly call toasts and documentation
+  precisions. [mokaddem]
+- [logout] url fixed, fixes #45. [iglocska]
+- [metatemplates] updated MYSQL.sql. [Andras Iklody]
+- [baseurl] for openmodal actions in the index factory fixed, fixes #46.
+  [iglocska]
+
+  - invalid url by prepending any url (even # for modal <a> tags) with the baseurl
+- [urls in links] [iglocska]
+- [CRUD] Renamed confusing function. [mokaddem]
+- [CRUD] Correct usage of the `like` condition operator on the query.
+  [mokaddem]
+- [js:bootstrap-helper] Make sure button exists. [mokaddem]
+- [pagination] Fixed ellipsis pagination. [mokaddem]
+- [command] Fixed importer support of metaFields. [mokaddem]
+- [element] Group context filter to support multiple conditions.
+  [mokaddem]
+- [CRUDComponent] Full group by on meta-templates. [mokaddem]
+- [helpers:bootstrap] Correctly closes tr tag. [mokaddem]
+
+Other
+~~~~~
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [mokaddem]
+- Merge branch 'main' into develop. [mokaddem]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [mokaddem]
+- Merge branch 'main' into develop. [iglocska]
+- Merge branch 'main' into develop. [mokaddem]
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  develop. [iglocska]
+- Merge branch 'main' into develop. [mokaddem]
+- Merge branch 'main' into develop. [iglocska]
+- Merge branch 'main' into develop. [iglocska]
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'main' into develop. [iglocska]
+- Merge branch 'develop' into main. [iglocska]
+- Merge branch 'fix-id-override' into develop. [mokaddem]
+- Merge branch 'inbox-misp-sync' into develop. [mokaddem]
+- Merge branch 'develop' into inbox-misp-sync. [mokaddem]
+- Merge remote-tracking branch 'origin/develop' into inbox-misp-sync.
+  [mokaddem]
+- Merge remote-tracking branch 'origin/develop' into inbox-misp-sync.
+  [mokaddem]
+- Merge branch 'develop' of github.com:cerebrate-project/cerebrate into
+  inbox-misp-sync. [mokaddem]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Merge pull request #54 from wagner-certat/doc-upgrade. [Andras Iklody]
+
+  doc: add upgrade documentation
+- Doc: add upgrade documentation. [Sebastian Wagner]
+
+  fixes #51
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [mokaddem]
+- Merge branch 'inbox' into main. [iglocska]
+- Merge branch 'main' into inbox. [iglocska]
+- Merge remote-tracking branch 'origin/main' into inbox-system.
+  [mokaddem]
+- Merge branch 'connector' into main. [iglocska]
+- Merge branch 'main' into connector. [iglocska]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Update README.md. [Andras Iklody]
+- Update README.md. [Andras Iklody]
+- Wip: initial connectors. [iglocska]
+- Merge branch 'index' into main. [iglocska]
+- Merge branch 'main' into index. [iglocska]
+- Merge pull request #39 from mokaddem/feature-updater. [Andras Iklody]
+
+  [new] Updater system
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  feature-updater. [mokaddem]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  feature-metaField-index-filtering. [mokaddem]
+
+
+v0.2 (2021-02-23)
+-----------------
+
+New
+~~~
+- [js:bootstrap-helper] Added support of text in overlay. [mokaddem]
+- [app] Lots of new helpers for views, js and genericElements.
+  [mokaddem]
+- [genericElements:topBar] Added contextual filtering. [mokaddem]
+- [webroot] Added bootstrap toaster. [mokaddem]
+- [helper] Added simple bootstrap navigation helper. [mokaddem]
+- [baseurl] added better baseurl handling. [iglocska]
+
+  - set the baseurl via /config/app_local.php
+    - simple set the baseurl to an absolute path or to a relative path if you with to use a subdirectory without setting a baseurl
+
+  - If no baseurl is set above, Cerebrate will also check the CEREBRATE_BASEURL environment variable
+- [fetch] individuals added. [iglocska]
+- [broods] added. [iglocska]
+
+  - Cerebrate <-> Cerebrate sync
+  - explore remote cerebrate instances
+  - fetch data from remote (orgs, individuals)
+  - run connection tests with a remote instance
+  - check the version, sync user privileges on the remote
+- [UI] connection test field added for the brood index. [iglocska]
+- [templates] generic ajax form added. [iglocska]
+- [custom pagination] component added. [iglocska]
+
+  - simply paginate arrays as opposed to going to the DB for data
+  - just use $this->CustomPagination->paginate($array);
+
+  - it will automatically use the pagination options passed in the request
+  - compatible with the default cakePHP pagination helper
+- [js] added connection test script. [iglocska]
+- [individuals] table capture functions added. [iglocska]
+- [Organisation] table capture function added. [iglocska]
+- [drawio] graphs added. [iglocska]
+- [config] added config using env variables for the DB connection.
+  [iglocska]
+- [command] First version of generic importer - WiP. [mokaddem]
+- [individuals] also contain metafields. [iglocska]
+- [csn] initial templates. [iglocska]
+- [meta templates] reworked. [iglocska]
+- [libraries] first JSON added to metaFields. [iglocska]
+- [CLI] user listing / password reset added. [iglocska]
+- [metaFields] system added. [iglocska]
+
+  - rework of several internal libraries
+  - append custom fields to objects
+  - templating system to assist users, using JSON files
+  - mapped the FIRST directory as a first test
+- [logos] updated colors requested by the Hungarian master. [Alexandre
+  Dulaunoy]
+- [trust circles] menues added. [iglocska]
+- [internal] CRUD component now accepts override fields for the data to
+  be patched. [iglocska]
+
+  - values derived from for example the currently authed user can be set in the data to be created for example
+- [Sharing groups] added (wip) [iglocska]
+
+  - CRUD
+  - attach organisation
+
+  still missing:
+  - remove organisation
+- [sharing groups] added to mysql.sql. [iglocska]
+- [UI] some refactor and added theming. [iglocska]
+- [UI] made the side menu responsive, fixes #16. [iglocska]
+- [init] added functions to create a default user. [iglocska]
+- [conf] file added as an example. [iglocska]
+
+  - to ease testing a simple http only conf file for cerebrate
+- [install] instructions. [iglocska]
+
+Changes
+~~~~~~~
+- [element:generic_index] Added more flexibility in topbar. [mokaddem]
+- [element:generic_index] Contextual filtering button UI improved.
+  [mokaddem]
+- [command:user] Renamed function toggleDisabled. [mokaddem]
+- [command:user] Option to enable/disable users. [mokaddem]
+- [js:bootstrap-helper] Overlay factory supports dark theme and auto
+  rounding. [mokaddem]
+- [js:api-helper] Allow passing status node overlay config. [mokaddem]
+- [js] Include dark mode variable. [mokaddem]
+- [element:generic_index] Improved quick filter functionality and UI.
+  [mokaddem]
+- [element:generic_index] Usage of additional status node for context
+  filtering. [mokaddem]
+- [element:generic_index] Usage of UI factory for group_search.
+  [mokaddem]
+- [js:bootstrap-helper] Allow UI.reload to include other status nodes.
+  [mokaddem]
+- [component:CRUD] Pass searched value to the view and allow searching
+  by hitting <enter> [mokaddem]
+- [component:CRUD] Added quick search using LIKE. [mokaddem]
+- [js:bootstrap-helper] Added comment. [mokaddem]
+- [broods] Moved to use the new factories. [mokaddem]
+- Added support of displayOnSuccess, non-dismissable modals and some
+  house cleaning. [mokaddem]
+- [command:updater] Added draft of meta-template update. [mokaddem]
+- [command:updater] Draft of manual updater script. [mokaddem]
+- [js:bootstrap-helper] new functionalities and refacto. [mokaddem]
+- [js:api] new functionalities and refacto. [mokaddem]
+- [helpers:DataFromPathHelper] Simplified usage. [mokaddem]
+- [helpers:bootstrap] Added support of variant in tabs. [mokaddem]
+- [sharinggroup] Improved support of CRUDComponent. [mokaddem]
+- [element:genericElements] Button placement consistency in generic
+  modal. [mokaddem]
+- [js:bootstrap-helper] Overlay factory correctly supports variant for
+  both elements. [mokaddem]
+- [element:genericElements] UI improvements in index factory. [mokaddem]
+- [js:api-helper] Renamed function. [mokaddem]
+- [component:CRUD] Remove usage of custom header + added custom form
+  validation feedback. [mokaddem]
+- [controllers] Bug fixes and usage of UI factory. [mokaddem]
+- [genericElements:indexTable] Improved UI of toggle field. [mokaddem]
+- [component:CRUD] Improved flexibility. [mokaddem]
+- [Component:CRUDComponent] Default `allow_all` to true when context
+  filtering. [mokaddem]
+- [genericElements:indexTable] Added documentation for toggle field.
+  [mokaddem]
+- [genericElements:indexTable] Added option in toggle field to skip full
+  index reload. [mokaddem]
+- [js:api-helper] Added documentation. [mokaddem]
+- [js:bootstrap-helper] Added documentation. [mokaddem]
+- [generic] Added Modal from URL support - Support Form submission -
+  Success / Fail callbacks - Modal reloading in case of validation
+  errors. [mokaddem]
+- [js-helper] Added quick methods and more documentation. [mokaddem]
+- [helper:stringFromPath] Added same feature but for array of strings.
+  [mokaddem]
+- [genericElement:single_view] Bit of refactoring and skip_meta_template
+  option. [mokaddem]
+- [helpers] Added documentation and tweakings. [mokaddem]
+- [metaTemplates] Outline default template. [mokaddem]
+- [metaTemplate:toggle] Enforce one default template per scope.
+  [mokaddem]
+- [metaTemplates:index] Improved conflict text. [mokaddem]
+- [genericElement:index] Allow support of closure for variables and
+  type. [mokaddem]
+- [genericElements] Perform ajax call when filtering with context.
+  [mokaddem]
+- [genericElements:listTopBar] Filtering context are taken from passed
+  data instead of set variables. [mokaddem]
+- [component:CRUD] Improved filtering context to be more flexible.
+  [mokaddem]
+
+  - Support fields to be taken as quick filters
+  - Support custom quick filters by specifying the conditions
+- [singleView:single_view] Usage of name instead of namespace for meta-
+  templates. [mokaddem]
+- [helper:boostrap] Refactored to use more functions. [mokaddem]
+- [singleViews:single_view] Improved layout for meta-templates.
+  [mokaddem]
+- [singleViews] Meta data are now clustered based on their template
+  namespace. [mokaddem]
+- [genericElements:toggle] Added support of requirement for being able
+  to change the toggle's state. [mokaddem]
+- [templates] House cleaning. [mokaddem]
+- [CRUDComponent] Added toggle. [mokaddem]
+
+  - Applied to meta-templates
+- [metaTemplate] Moved to namespaced meta fields based on their template
+  - WiP. [mokaddem]
+- [ACL] update to include broods. [iglocska]
+- [baseurl] exposed as an easy to reach variable in all views.
+  [iglocska]
+- [Aligntments] setAlignment function moved to its appropriate model.
+  [iglocska]
+- [internal] saveMetafields moved to AppTable. [iglocska]
+- [CRUD component] internal changes. [iglocska]
+
+  - removed saveMetaFields function from the component
+  - fixed issues with associations being patched in automatically for add/edit
+- [config] disable debug by default. [iglocska]
+- [logo] colour change. [iglocska]
+
+  - for the swarm
+- [command] Added configuration file for enisa-csirts. [mokaddem]
+- [command] Generic importer usage of saveMany and improved TUI.
+  [mokaddem]
+- [command] Generic importer added more validation and progress bar.
+  [mokaddem]
+- [command] Added support of CSV and documentation. [mokaddem]
+- [command] Generic importer improved and added support of value
+  override. [mokaddem]
+- [command] Generic import tool allow passing path directly. [mokaddem]
+- [command] Added support of meta-field in generic importer. [mokaddem]
+- [genericForm] Fallback entity to null (to model-less form) if not
+  provided. [mokaddem]
+- [sharingGroupOrgs] Renamed table back to original name. [mokaddem]
+- [encryption keys] index - removed superfluous owner id. [iglocska]
+- [install] Added syntax highlighting. [mokaddem]
+- [install] Removed duplicated entries. [Sami Mokaddem]
+- [menu system] fixes and updates. [iglocska]
+
+  changes:
+  - added "popup" as a new flag for the menu element in the ACL component - links in the menues will be popovers for these
+  - added some missing links
+
+  bug fixes:
+  - fixed a bug breaking the adding of sharing groups due to the id variable not being set
+
+  as reported by cert.pl
+- [user add] don't autocomplete username/password fields. [iglocska]
+- [submenu fixes] Correctly show scope specific sub menues. [iglocska]
+
+  - also added view my profile / edit my profile buttons
+- [instance] status moved to the correct controller. [iglocska]
+- [VERSION] string added. [iglocska]
+- [ACL] rework. [iglocska]
+
+  - moved the menu into the ACL function
+  - tied ACL function into menubuilding process to remove items the user has no access to - thanks to @JakubOnderka for the inspiration
+  - tied missing endpoints into the ACL system
+  - fixed the queryACL function to work with Cerebrate
+- [doc] Added mod_rewrite note. [Steve Clement]
+- [doc] Updated INSTALL doc. [Steve Clement]
+- [logo] colors requested by the Hungarian leader again. [Alexandre
+  Dulaunoy]
+- [users add UI] changed password to an actual password field.
+  [iglocska]
+- [INSTALL] added some missing points to get cerebrate up and running.
+  [Andras Iklody]
+- [doc] install link added. [Alexandre Dulaunoy]
+- [UI] some adjustements to make both themes less awkward. [iglocska]
+- [instructions] Added requirements. [iglocska]
+- [cerebrate setting defaults] added. [iglocska]
+- [INSTALL] instruction changes. [iglocska]
+
+  - no need to yell
+- [gitignore] updated. [iglocska]
+- [mysql] empty db script updated. [iglocska]
+- [restructure] the application. [iglocska]
+
+  - move the app dir's contents to the source
+  - update composer for easier installation
+
+Fix
+~~~
+- [componenent:CRUD] Fixed oneToMany contextual filters. [mokaddem]
+- [sharinggroups] Possibility to remove/add org from sharinggroup.
+  [mokaddem]
+- [component:CRUD] Support for older PHP versions. [mokaddem]
+- [component:CRUD] Fixed FULL_GROUP_BY issue and simplified contextual
+  filtering. [mokaddem]
+- [element:generic_index] Toggle field passes expected data format.
+  [mokaddem]
+- [element:generic_index] Correctly passes button variable. [mokaddem]
+- [Component:CRUD] Allow saving metaFields. [mokaddem]
+- [broods] Fixed quick search. [mokaddem]
+- [component:CRUD] Extraction contextual filters based on association
+  type. [mokaddem]
+- [broods:edit] Include organisation dropdown data. [mokaddem]
+- [component:CRUDComponent] Take data linked to the current table
+  Performs a query similar to a right join instead of dumping the table
+  for composed contextual filters. [mokaddem]
+- [js:bootstrap-helper] Correctly returns promise. [mokaddem]
+- [user] Allow password update and hiden confirm_password field.
+  [mokaddem]
+- [genericElements] Fixed Usage of bootstrap-helper's overlay.
+  [mokaddem]
+- [helper:bootstrap] Closed correct node. [mokaddem]
+- [component:CRUD] Allow filtering by array of values. [mokaddem]
+- [genericElements:single_view] Only display meta-field box if the view
+  contains some. [mokaddem]
+- [component:CRUD] Restrict metafields to only the object being viewed.
+  [mokaddem]
+- [Component:CRUD] Allow edit of meta-fields and added group_by clause.
+  [mokaddem]
+- [helper:bootstrap] Correctly close div if tab option is supplied.
+  [mokaddem]
+- [genericElements:form] Make sure current model have meta-templates.
+  [mokaddem]
+- [cleanup] unused var in single view. [iglocska]
+- [index] search fixed. [iglocska]
+
+  - correctly persist url parameters when searching
+- [org] field in the index table fixed. [iglocska]
+
+  - removed debug
+  - correct extraction of the data
+  - show links for the orgs to the org view
+- [metafield] account for "raw" being null but still set - use isset for
+  the check. [iglocska]
+- HttpOnly should be httponly. [Andras Iklody]
+- [command] Generic importer correct usage of options. [mokaddem]
+- [organisations] Make sure to cascade deletion calls. [mokaddem]
+- [sharingGroup] Various fixes for sharing groups. [mokaddem]
+
+  - Renamed sharingGroupsOrgs table to follow cake4's recommendation
+  - Fix case if logged user doesn't have an organisation
+  - Provide all orgs if user is admin
+  - Fix issue with model associated with sharingGroupOrgs
+  - Fix addOrg missing entity for genericForm helper
+- [password validation] don't accept linebreaks. [iglocska]
+
+  - as reported by cert.sk
+- [encryption key] searches. [iglocska]
+- [pagination] link highlighting. [iglocska]
+- Encryption modifications. [iglocska]
+
+  - added a limited edit function
+  - changed the index to make more sense
+
+  - as reported by cert.pl
+- [org controller] invalid import statement fixed. [iglocska]
+- [encryption keys] adding a key correctly returns the expected view
+  elements. [iglocska]
+
+  - also some minor tweaks on the index
+  - CRUD component now accepts a redirect parameter
+
+  - as reported by cert.pl
+- [cleanup] of breakpoint. [iglocska]
+- [passwords] several fixes. [iglocska]
+
+  - complexity requirements added
+  - validation rules added
+  - added confirm password rules
+
+  - as reported by cert.pl
+- Organisation entity renamed. [iglocska]
+- [metafields] don't show the element if no metafields are configured
+  for the scope. [iglocska]
+- [user edit] required password change. [iglocska]
+
+  - as reported by cert.pl
+- [security] Removed a user's ability to change their role. [iglocska]
+
+  - as reported by cert.pl
+- [ACL] added missing entries. [iglocska]
+- [internal] metafields can also be empty. [iglocska]
+- [templates] left off. [iglocska]
+- [sharing groups] don't include ALL user details in the sharing group.
+  [iglocska]
+- [open APIs] fixed some minor issues. [iglocska]
+- [encryption] keys could not be added due to invalid marshaling, fixes
+  #15. [iglocska]
+- [UI] removed the annoying left side padding. [iglocska]
+- [UI] reverted ajax index tables not having the title/description.
+  [iglocska]
+
+  - messes with the pagination
+- [public API] routes added. [iglocska]
+- [default user] Added default first/lastname. [iglocska]
+- [typo] pluralise model name. [iglocska]
+- [internal] Correct way of fetching the ID of the new entity.
+  [iglocska]
+- [import] of table registry added to users table. [iglocska]
+- [install] point to correct mysql script. [iglocska]
+- [markdown] fail fixed. [iglocska]
+
+Other
+~~~~~
+- Merge pull request #38 from schacht-certat/schacht/debian. [Andras
+  Iklody]
+
+  Add initial debian/ directory
+- Add initial debian/ directory. [Birger Schacht]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Merge pull request #37 from mokaddem/namespaced-metatemplates. [Andras
+  Iklody]
+
+  New libraries and namespaced meta-templates
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  namespaced-metatemplates. [mokaddem]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  namespaced-metatemplates. [mokaddem]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Update README.md. [Andras Iklody]
+- Merge pull request #35 from mokaddem/genericImporter. [Andras Iklody]
+
+  Generic importer
+- Merge pull request #34 from mokaddem/fix-sharing-group. [Andras
+  Iklody]
+
+  fix: [sharingGroup] Various fixes for sharing groups
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Merge pull request #32 from mokaddem/patch-1. [Andras Iklody]
+
+  chg: [install] Removed duplicated entries & syntax highlighting
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Merge pull request #30 from rommelfs/patch-3. [Andras Iklody]
+
+  cleanup, consistency
+- Cleanup, consitency. [Sascha Rommelfangen]
+- Merge pull request #23 from rommelfs/patch-2. [Andras Iklody]
+
+  some details added
+- Merge branch 'main' into patch-2. [Andras Iklody]
+- Merge pull request #17 from SteveClement/install_docs. [Andras Iklody]
+
+  chg: [doc] Updated INSTALL doc
+- Some details added. [Sascha Rommelfangen]
+- New [Authkey] implementation ready. [iglocska]
+
+  - users can have multiple keys
+  - keys are hashed with bcrypt
+  - each key can have its own expiration
+  - each key can have a contextual comment
+
+  - authentication via API requests happens with the Authorization header
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Merge branch 'main' of github.com:cerebrate-project/cerebrate into
+  main. [iglocska]
+- Update INSTALL.md. [Andras Iklody]
+
+
+v0.1 (2020-06-21)
+-----------------
+
+New
+~~~
+- [routes] added route for open spaces. [iglocska]
+- [open] spaces added. [iglocska]
+
+  - public interfaces that are configurable, early iteration
+- [API auth] added. [iglocska]
+- [logout] button added to the menues. [iglocska]
+- [single view] updated, allows for child indeces to be loaded in an
+  accordion. [iglocska]
+- [UI] brought up to date with factory changes. [iglocska]
+- [Authkeys] added. [iglocska]
+- [login] page added. [iglocska]
+- [instance] scope added. [iglocska]
+- [auth] Added authentication. [iglocska]
+- [Roles, Users] added. [iglocska]
+- [encryption keys] controller/model/template added. [iglocska]
+- [internal] CRUD controller added. [iglocska]
+
+  - centralise all CRUD operations
+    - flexible library, with the goal of keeping controllers as lean as possible
+    - can be used as a passthrough for options
+- [logo] added. [Alexandre Dulaunoy]
+- [internal] appcontroller/appmodel updates. [iglocska]
+- [UUID] behaviour added. [iglocska]
+
+  - auto set UUIDs on objects
+- [paramhandler] component added. [iglocska]
+
+  - centralised handling of all things related to request parameter parsing
+- [CRUD] crud component added. [iglocska]
+
+  - standardise on crud operations, simplify the controller codebase
+  - massive reduction in complexity
+- [menu] centralised top and side menu. [iglocska]
+
+  - single source, top menu uses masked version of side menu
+  - constructor in AppTables, making it available across the application
+- [encryption keys] Encryption key management added. [iglocska]
+
+  - add/list/search for keys and assign them to users/organisations
+  - several new internal features
+    - refactored/abstracted parameter harvesting
+    - automatic dependency system for the form templating
+    - several others
+- [documentation] Added screenshots and a short descriptin. [iglocska]
+- [initial] import of the project files. [iglocska]
+
+  - Cerebrate v0.1 initial WIP version
+
+  [Features]
+  - initial version of TrustDB
+    - Organisation
+    - User scope
+    - Alignments between Users and Organisations
+    - semi-implemented encryption key store
+
+  [Internals]
+  - MISP systems transposed to CakePHP4 / Bootstrap 4 / Cerebrate
+    - UI factories
+      - Index factories
+      - Form factories
+    - internal:
+      - RestResponse library
+      - ACL library in progress
+    - new clean UI using BS4
+
+  - New systems:
+    - UI factories
+      - view factories
+
+  - Datamodel import/cleaning via SQL scripts
+- Added small note to keep track of the db. [iglocska]
+
+Changes
+~~~~~~~
+- [menu] Added some missing elements to the menues (encryption keys and
+  instances) [iglocska]
+- [index] factories modified to make index views leaner for ajax
+  rendering. [iglocska]
+- [images] added to webroot for the README.md to be rendered as a lading
+  page. [iglocska]
+- [routes] updated for default landing page. [iglocska]
+- [composer] Added dependencies. [iglocska]
+- [templates] Overhaul of the factories. [iglocska]
+- [templates] Individuals and Organisations updated. [iglocska]
+- [Controllers] Alignments, Individuals, Organisations updated for the
+  CRUD component. [iglocska]
+- [Factories] Refactored side-menu/header/footer construction.
+  [iglocska]
+
+  - better separation between systems and data for code reusability
+  - genericElements should be free of any application specific code for portability
+- [doc] some clean-up. [Alexandre Dulaunoy]
+
+Fix
+~~~
+- [css] Added login css/image. [iglocska]
+- [roles] API index fixed. [iglocska]
+- [CRUD] various issues fixed with the search parameter handling on the
+  index views. [iglocska]
+- [htaccess] fixed. [iglocska]
+- [Individuals Model] Table updated with relations and smarter UUID
+  handling. [iglocska]
+- [templates] delete url parsing rules fixed. [iglocska]
+- [ParamHandler] fixed correct URL query string parsing for related
+  models. [iglocska]
+- [inifinite loop] resolved in the templating due to invalid element
+  call. [iglocska]
+- [encryption keys] index was left off. [iglocska]
+- [documentation] fixed another image link. [Andras Iklody]
+- [documentation] invalid image link. [Andras Iklody]
+- [alignments] added along with various changes. [iglocska]
+
+Other
+~~~~~
+- Merge branch 'master' of github.com:cerebrate-project/cerebrate.
+  [iglocska]
+- Merge branch 'master' of github.com:cerebrate-project/cerebrate.
+  [Alexandre Dulaunoy]
+- Merge branch 'master' of github.com:cerebrate-project/cerebrate.
+  [iglocska]
+- Initial commit. [Andras Iklody]
+
+
