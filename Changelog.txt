@@ -1,5 +1,420 @@
 # Changelog
 
+## v1.4 (2022-01-27)
+
+### New
+
+* [ACL] added canEditUser() function. [iglocska]
+
+  - simple comparison between two users
+  - checks role + org based permission
+
+* [CRUD] added some new useful features. [iglocska]
+
+  - afterFind for the edit functions to make last minute decisions on the modification after already having loaded the data to be modified
+  - moved the field restrictions to be able to pass it to the view
+  - try/catch for bulk deletions. A single failure in the beforeSave call will no longer block the entire saving process
+
+* Add /api/v1/users/index api test. [Luciano Righetti]
+
+* Add /api openapi spec view with redoc, add faker to fixtures, validate api responses with openapi spec, add /api/v1/ prefix to api routes. [Luciano Righetti]
+
+* Initial api and integration tests. [Luciano Righetti]
+
+* [doc] Added prerequisites document. [Sami Mokaddem]
+
+* [localtool:commonConnectorTools] Added new logger for each local tools. [Sami Mokaddem]
+
+* [Outbox] entity added. [iglocska]
+
+  - to inherit the appModel functions
+
+* [CodeMirror] Shows a placeholder whenever the textarea is empty. [Sami Mokaddem]
+
+* [encryption key] view added. [iglocska]
+
+  - was missing, despite links to it
+
+* [doc] Added slides about cerebrate and local tools synchronisations. [Sami Mokaddem]
+
+### Changes
+
+* [Version] bump. [iglocska]
+
+* [user add] form defaults. [iglocska]
+
+  - org will default to own org for site admins
+  - role will default to the default role (if set)
+
+* [form] dropdown default key added. [iglocska]
+
+* Add wiremock stub verification. [Luciano Righetti]
+
+* Do not exit 1 if wiremock was not running. [Luciano Righetti]
+
+* Clean test. [Luciano Righetti]
+
+* Add missing openapi endpoints for sync test. [Luciano Righetti]
+
+* Tighten tests assertions. [Luciano Righetti]
+
+* Clean test. [Luciano Righetti]
+
+* [userSettings:add] Adhere to the passed user context. [Sami Mokaddem]
+
+* [navigation:users] Restored breadcrumb navigation to access user profile settings. [Sami Mokaddem]
+
+* [base settings provider] pass settings by reference for evaluation. [iglocska]
+
+  - opens it up for modifications by the hooking functions
+
+* [settingsTable] Use settings array for the actual saving in saveSetting. [iglocska]
+
+  - allows us to modify a value in the processing steps before the value is committed to disk
+
+* [MISP connector] user edit/delete temporarily commented out as they're not implemented yet. [iglocska]
+
+* [Navigationcomponent] added missing changes from previous commit. [iglocska]
+
+* [Organisation] Entity accessibility rules. [iglocska]
+
+  - make created only accessible when creating new objects
+
+* [navigation] Breadcrumb generation is user aware. [iglocska]
+
+  - moved the initialisation of the generation to be invoked from the appcontroller's beforefilter, after the user is loaded into the ACL component
+  - Only show user setting edits when the user is editing themselves
+
+* [inbox:createEntry] Checks for remote back connection is more flexible. [Sami Mokaddem]
+
+  Handle the case of trailing slash
+
+* [outboxProcessors:brood] Gracefully catch server errors on remote broods. [Sami Mokaddem]
+
+* [outboxProcessors:broods] Provide errors while trying to re-send a message. [Sami Mokaddem]
+
+* [brood:connectionTest] Correctly handles network exceptions. [Sami Mokaddem]
+
+* [localtTools:connectionRequest] Provide more info on exception. [Sami Mokaddem]
+
+* [inbox:index] Sort messages by created datetime. [Sami Mokaddem]
+
+* [auditlog:index] Break text in changed column. [Sami Mokaddem]
+
+* Minor improv. [Luciano Righetti]
+
+* Remove the /api/v1 prefix for api endpoints. [Luciano Righetti]
+
+* Remove todo section. [Luciano Righetti]
+
+* Move openapi validator initialization to tests/bootstrap.php so its only parsed once. [Luciano Righetti]
+
+* Refactor ApiTestTrait to reduce code duplication, enforce openapi spec validations. [Luciano Righetti]
+
+* Extend openapi spec. [Luciano Righetti]
+
+* Rename test files. [Luciano Righetti]
+
+* Migrate mysql.sql initial schema to a phinx migration. [Luciano Righetti]
+
+* [layout:header-profile] Improved spacing. [Sami Mokaddem]
+
+* [user] edit restricted to password only for self. [iglocska]
+
+* [instance] Added support of API response for 2 endpoints. [Sami Mokaddem]
+
+* [localTools:local_tool_connectors]  Added support of CodeMirror placeholder. [Sami Mokaddem]
+
+* Clear cakephp cache. [Luciano Righetti]
+
+* Wait for db before running migrations. [Luciano Righetti]
+
+### Fix
+
+* [login] hide keycloak login if keycloak login is disabled. [iglocska]
+
+* [roles] setting default should be exclusive. [iglocska]
+
+  - added aftersave action to remove default from other roles
+
+* [sharing group form] default to own org as owner. [iglocska]
+
+  - reconsider if this should be a configurable setting at all
+
+* Mixed up concepts. [Luciano Righetti]
+
+* Mark test as incomplete (better). [Luciano Righetti]
+
+* Mark test as skipped, not critical. [Luciano Righetti]
+
+* Wrong namespaces. [Luciano Righetti]
+
+* Failing when request is empty json object. [Luciano Righetti]
+
+* [users:view] Correctly reload authkey child panel when performing operations. [Sami Mokaddem]
+
+* [users:toggle] Prevent users to disable admins. [Sami Mokaddem]
+
+* [users:delete] Typo copy paste error. [Sami Mokaddem]
+
+* [Keycloak baseurl] remove trailing slashes. [iglocska]
+
+* [userSettings] Allow admin to edit other user's settings. [Sami Mokaddem]
+
+* [users:settings] Allow admin to see account settings of other users. [Sami Mokaddem]
+
+* [security] fields not adhered to in CRUD components edit. [iglocska]
+
+  - users can circumvent restrictions on editable fields
+  - can lead to privilege escalation when users edit themselves
+
+* [lax URL validation] added for Broodstable. [iglocska]
+
+  - can be reused elsewhere too
+  - allows for http://hostname style urls
+
+* [user view] ACL fixed. [iglocska]
+
+* [Sharing groups] UUID and owner org shouldn't be editable. [iglocska]
+
+* [modified] saving fixed for sync captures. [iglocska]
+
+  - set the field as not dirty to force an update
+  - stops the exceptions thrown on pulling these objects in
+
+* [users] add. [iglocska]
+
+  - fixed role selection
+
+* [users] role based action filtering added. [iglocska]
+
+  - to avoid annoying clickable, but blocked actions for og admins
+
+* [templates:common] Removed extra closing tag. [Sami Mokaddem]
+
+* [components:CRUD] Support of controller's paginate public variable. [Sami Mokaddem]
+
+* [genericElements:tags] List tags when editing an entity. [Sami Mokaddem]
+
+* Run wiremock in background. [Luciano Righetti]
+
+* Assertions are already executed. [Luciano Righetti]
+
+* Copy&paste. [Luciano Righetti]
+
+* Incorrect check. [Luciano Righetti]
+
+* Test. [Luciano Righetti]
+
+* Deprecation warning. [Luciano Righetti]
+
+* [doc] Typo in text. [Sami Mokaddem]
+
+* [localTool:CommonConnector] Ensure one logger per connector. [Sami Mokaddem]
+
+* [authkey] add fixed. [iglocska]
+
+  - incorrectly potentially filter out valid options when adding a key by a regular user
+
+* [user edit] fixed for non admins. [iglocska]
+
+* [encryption keys] several fixes. [iglocska]
+
+  - fix the user view to correctly point to the list of related encryption keys
+  - fix the lookup on the index to be based on owner_model + owner_id combo
+  - fix the filtering of the dropdown in the encryption key add form to only valid options
+
+* [CRUD] delete post message fix. [iglocska]
+
+  - correct order of execution for the beforesave command
+
+* [ACL] tightening for delete functions. [iglocska]
+
+  - implemented beforeSave() function in the CRUD::delete() functionality
+  - added correct handling for the organisation level encryption keys in the beforeSave constructor
+
+* [encryption keys] functionality to filter orgs/individuals fixed. [iglocska]
+
+  - actually execute the query rather than just build it
+
+* [encryption keys] tightened ACL across all CRUD functions. [iglocska]
+
+* [authkeys] tighten requirements to add authkeys for other org admins. [iglocska]
+
+  - site admin: can add to all
+  - org admin: can add to all in org, except site admin
+  - everyone else: can add to self only
+
+* [organisation:add] Removed useless description field. [Sami Mokaddem]
+
+* [inividuals] add shouldn't have the tagging options. [iglocska]
+
+  - can't tag that which does not exist yet
+
+* [inividuals] add shouldn't have the tagging options. [iglocska]
+
+  - can't tag that which does not exist yet
+
+* [placeholder removed] WiP functionality for local_tool->local_tool connections within the same brood temporarily removed. [iglocska]
+
+  - was never fully implemented
+
+* [organisation] add/edit doesn't save URL. [iglocska]
+
+* [ACL] Allow anyone to view encryption keys. [Sami Mokaddem]
+
+* [userSettings] Various permissions issues. [Sami Mokaddem]
+
+* [helpers:bootstrap] Table's cell generator gets the correct row index. [Sami Mokaddem]
+
+* [tagging] error when trying to add a tag that doesn't exist yet. [iglocska]
+
+  - add default colour to circumvent the error
+
+* [ACL] proper error messages on user edit. [iglocska]
+
+  - don't just silently redirect to the own user editing if the user isn't authorised to modify another user
+
+* [ACL] added correct file for previous fix (user edit admin permission check) [iglocska]
+
+* [ACL] fixed ACL check on user edit for the admin permission. [iglocska]
+
+  - invalid name used for the lookup (perm_side_admin instead of perm_admin) leading to incorrect downgrading of the permissions
+
+* [migrations] correct string length to avoid strict mode issues with keys exceeding 767 bytes. [iglocska]
+
+* Add missing copyright notice. [Luciano Righetti]
+
+* Typo. [Luciano Righetti]
+
+### Other
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge pull request #86 from righel/add-inter-connection-tests. [Andras Iklody]
+
+  Add inter-connection test
+
+* Merge branch 'develop' into add-inter-connection-tests. [Luciano Righetti]
+
+* Add: initial version of cerebrate->cerebrate misp interconnection. [Luciano Righetti]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into main. [iglocska]
+
+* Update VERSION.json. [Andras Iklody]
+
+* Merge pull request #85 from righel/add-test-workflow-gh-action. [Andras Iklody]
+
+  add: github action test workflow
+
+* Add: github action test workflow. [Luciano Righetti]
+
+* Merge pull request #80 from righel/add-integration-tests. [Andras Iklody]
+
+  Add integration tests
+
+* Add: change password via api test, add helper methods to ApiTestTrait. [Luciano Righetti]
+
+* Merge branch 'develop' into add-integration-tests. [Luciano Righetti]
+
+* Add: cover authkeys api endpoints, extend openapi spec. [Luciano Righetti]
+
+* Merge branch 'develop' into add-integration-tests. [Luciano Righetti]
+
+* Merge branch 'develop' into add-integration-tests. [Luciano Righetti]
+
+* Add: more encription keys api endpoints covered. [Luciano Righetti]
+
+* Merge branch 'develop' into add-integration-tests. [Luciano Righetti]
+
+* Add: api tests for /encryptionkeys, extend openapi spec. [Luciano Righetti]
+
+* Add: wiremock tests and boilerplate, update test readme, extend openapi spec. [Luciano Righetti]
+
+* Add: more sharing groups api tests, add broods api tests, extend openapi spec. [Luciano Righetti]
+
+* Add: add sharing groups api tests, extend openapi spec. [Luciano Righetti]
+
+* Add: some extra scopes and actions. [Luciano Righetti]
+
+* Add: add basic api coverage of inbox processor endpoint, extend openapi spec. [Luciano Righetti]
+
+* Add: add individuals api tests and extend openapi spec. [Luciano Righetti]
+
+* Add: add api tests for tags and orgs, extend openapi spec, fix routes for tags plugin. [Luciano Righetti]
+
+* Add: add API menu option. [Luciano Righetti]
+
+* Add: add/edit operations api tests and openapi spec. [Luciano Righetti]
+
+* Add: add users add/edit/delete api tests and openapi docs. [Luciano Righetti]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge remote-tracking branch 'origin/develop' into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge pull request #79 from righel/add-wait-for-it-script-docker. [Andras Iklody]
+
+  chg: wait for db before running migrations
+
+* Merge branch 'main' into develop. [iglocska]
+
 
 ## v1.3 (2021-12-22)
 
