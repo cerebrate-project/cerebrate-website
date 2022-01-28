@@ -3,7 +3,7 @@ title: Cerebrate version 1.4 released - the open source companion to ISACs, CSIR
 tags: release 
 ---
 
-# Cerebrate version 1.4 released - OpenAPI integration - the open source companion to ISACs, CSIRTs and SOCs
+# Cerebrate version 1.4 released - OpenAPI integration, improvements and many fixes
 
 We are happy to announce the 1.4 release of Cerebrate, a stability and bug-fix release resolving a long list of issues that have plagued Cerebrate so far.
 
