@@ -17,7 +17,7 @@ OpenAPI integration and descriptions directly available via the UI.
 
 ## Fixes
 
-A long list of fixes, affecting most subsystems, from API, through local tools all the way to the configuration settings. Massive thank you to Dawid Czarnecki from [Zigrin Security](https://zigrin.com/), who is conducting a penetration test of Cerebrate and was kind enough to report any bugs that he ran into during his extensive testing. We would also like to thank the [Luxembourg Ministry of Defense](https://defense.gouvernement.lu/en.html), for funding the testing and helping us ensure the reliability and security of our tooling.
+A long list of fixes, affecting most subsystems, from API, through local tools all the way to the configuration settings. Massive thank you to Dawid Czarnecki from [Zigrin Security](https://zigrin.com/), who is conducting a penetration test of Cerebrate and was kind enough to report any bugs that he ran into during his extensive testing. We would also like to thank the [The Luxembourg Armed Forces (LAF)](https://defense.gouvernement.lu/en.html), for funding the testing and helping us ensure the reliability and security of our tooling.
 
 Cerebrate is the core software component of the [MeliCERTes project](https://digital-strategy.ec.europa.eu/en/news/open-platforms-collaborate-cyber-threats), aiming to support the pan-european information exchange and collaboration of the CSIRT community. The project is co-funded by the European Commission under Connecting Europe Facility.
 
