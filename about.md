@@ -45,5 +45,7 @@ The core software development is lead by the [MISP](https://www.misp-project.org
 
 # Funding 
 
+![melicertes logo](/assets/images/logo/melicertes.png)
+
 This project has been co-funded by **“Connecting Europe Facility – Cybersecurity Digital Service Infrastructure Maintenance and Evolution of Core Service Platform Cooperation Mechanism for CSIRTs – MeliCERTes Facility” (SMART 2018/1024)**.
 
