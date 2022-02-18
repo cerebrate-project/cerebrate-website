@@ -1,3 +1,12 @@
+---
+layout: article
+titles:
+  # @start locale config
+  en      : &EN       Security 
+  # @end locale config
+key: page-security
+---
+
 # Security Policy
 
 ## Reporting security vulnerabilities for Cerebrate or related Cerebrate project repositories
