@@ -1,5 +1,651 @@
 # Changelog
 
+
+## v1.5 (2022-05-17)
+
+### New
+
+* [keycloak] command line tool. [iglocska]
+
+  - automateable sync
+  - fixed various issues
+  - added logging of issues
+
+* [keycloak] sync added. [iglocska]
+
+  - created/updates users
+  - creates/updates/removes roles
+  - creates/updates/removes orgs
+
+* Add api tests for MetaTemplates and openapi spec, fix minor issues. [Luciano Righetti]
+
+* [keycloak] log enrollment outcome in the audit log. [iglocska]
+
+* [password auth] added setting to disable password auth. [iglocska]
+
+  - not needed in some cases for keycloak enabled instances
+
+* [CRUD] added beforeMarshal hook. [iglocska]
+
+* [individuals] new finder method to find by alignment. [iglocska]
+
+* [users] several changes. [iglocska]
+
+  - make usernames immutable
+  - restrict user creation to aligned individuals (org admin only)
+  - optionally create individual while creating a user
+
+* [metafields-types:ipv6] Support of ipv6. [Sami Mokaddem]
+
+* [tools:CidrTool] Ported CidrTool from MISP. [Sami Mokaddem]
+
+* [lib:metafields] New template `CSIRT Constituency` [Sami Mokaddem]
+
+* [metaFields] Support of meta-fields types. [Sami Mokaddem]
+
+* [layout:sidebar] Notifications in the sidebar. [Sami Mokaddem]
+
+* [helpers:bootstrap] Added notification bubble. [Sami Mokaddem]
+
+* [registration] added optional registration flood protection. [iglocska]
+
+  - As reported by Dawid Czarnecki from Zigrin Security
+
+* [flood protection] behaviour added. [iglocska]
+
+  simple expiration system to allow flood protections to be added to any functionality
+
+* [flood protection] schema added. [iglocska]
+
+* [Exception] 429 added. [iglocska]
+
+* [notification] Added initial version of the notification system. [Sami Mokaddem]
+
+* [dependency:js] Added moment.js. [Sami Mokaddem]
+
+* [helper:valueGetter] Helper to help execute closure to get a value if needed. [Sami Mokaddem]
+
+* [themes] bash script to help dev compile css files. [Sami Mokaddem]
+
+* [metaTemplate] Interface and functions to update meta-templates - WiP. [Sami Mokaddem]
+
+  Actual update not implemented yet.
+
+* [elements:breadcrumb] Added possibility to have badges in action item. [Sami Mokaddem]
+
+* [meta_templates:it_infra_and_services] Added new template for org infra and services. [Sami Mokaddem]
+
+* [genericElement:index_table] Added support of meta_fields searches. [Sami Mokaddem]
+
+* [genericElements:index_table] Support of meta_fields in table column. [Sami Mokaddem]
+
+* [mailing-list] Added mailing list feature - WiP. [Sami Mokaddem]
+
+### Changes
+
+* [metatemplate:meta_fields_to_update] Only show notice if applicable. [Sami Mokaddem]
+
+* [indexTable:context_filters] Support of default context filter. [Sami Mokaddem]
+
+  This filter is used by default if none is provided
+
+* [meta-template:update] Default update strategy to be `create_new` [Sami Mokaddem]
+
+* [instance:getStatistics] Usage of cake's FrozenTime instead of DateTime. [Sami Mokaddem]
+
+* [Component:CRUD] Only show used meta-template in view pages. [Sami Mokaddem]
+
+* [settingProvider:cerebrate] Typo in `password_auth.enabled`'s name. [Sami Mokaddem]
+
+* [inboxProcessors] Change deprecated `notEmpty` to `notEmptyString` [Sami Mokaddem]
+
+* [metaTemplates:computeConflicts] Usage of subqueries instead of array of IDs. [Sami Mokaddem]
+
+* [metafields] Passed argument can either be an object or array. [Sami Mokaddem]
+
+* [metaFields] Added metafield type validation. [Sami Mokaddem]
+
+* [component:CRUD] Better validation messages. [Sami Mokaddem]
+
+* [behaviors:metafields] Moved type handlers to the meta-template-fields table. [Sami Mokaddem]
+
+* [instance:searchAll] Sharinggroup filter on org membership in addition to owner. [Sami Mokaddem]
+
+* [sharingroup:index] Changed conditions allowing member org to view a sharing group. [Sami Mokaddem]
+
+  Previously only the SG owner could see the SG
+
+* [organisations] Added meta-field global filtering. [Sami Mokaddem]
+
+* [index_table:group_search] Changed name for better visibility. [Sami Mokaddem]
+
+* [users] restrict org admins from creating other org admins. [iglocska]
+
+  - temporary solution for a single community, make this optional in the future
+
+* [user add] if no password was set, set a random one. [iglocska]
+
+  - can't be used so far as we have no emailing in place
+  - it allows user creation when username/password mode is disabled
+
+* [templates] for user creation now have a minimalist individiual creation included. [iglocska]
+
+* [user] view add link to user's individual. [iglocska]
+
+* [metafield-type:ipv4] Usage of Cdir tool. [Sami Mokaddem]
+
+* [metafield-types:ipv4] Improved logics. [Sami Mokaddem]
+
+* [users] Removed useless imports. [Sami Mokaddem]
+
+* [indexTable:filtering] Initial work on supporting custom operators. [Sami Mokaddem]
+
+* [layout:sidebar] Only show collapsible parents if they have children. [Sami Mokaddem]
+
+* [mailinglist] Added ACL conditions on mailing list operations. [Sami Mokaddem]
+
+  - Site admins have all authorizations
+  - Org admins can manipulate the list their user own (can be later replaced by organisation_id instead of user_id)
+  - Other users can see the all lists they are included in
+
+* [Component:ACL] Added entries for mailing list. [Sami Mokaddem]
+
+* [Component:ACL] Added entry for audit log filtering. [Sami Mokaddem]
+
+* [Component:CRUD] Allow to filter out rows from the index with afterFind. [Sami Mokaddem]
+
+  Filtering can be achieved by returning `false` instead of the row in the `afterFind` function
+
+* Removed useless comments. [Sami Mokaddem]
+
+* Removed unused commented code. [Sami Mokaddem]
+
+* [metaTemplates] Removed comment. [Sami Mokaddem]
+
+* [Component:CRUD] Removed comment and init correct variable type. [Sami Mokaddem]
+
+* [Component:CRUD] Typo. [Sami Mokaddem]
+
+* [migration] Finalized more-metafields-column script. [Sami Mokaddem]
+
+* [flood protection] Changed the description of the setting based on the used IP source. [iglocska]
+
+  - added a warning about the IP source setting affecting the efficacy of the flood protection in regards to an attacker being potentially able to spoof their IP
+  - Warn the admin to make sure that the reverse proxy used (the main reason to use the alternate headers in the first place) needs to be configured to correctly overwrite the header
+
+  - as reported by Dawid Czarnecki of Zigrin Security
+
+* [organisation] Removed useless class variable. [Sami Mokaddem]
+
+* [behavior:meta-fields] Renamed finder function. [Sami Mokaddem]
+
+* [libraries:meta-template] Bumped version. [Sami Mokaddem]
+
+* [header] moved inline style in css file. [Sami Mokaddem]
+
+* [notifications] Slightly improved UI. [Sami Mokaddem]
+
+* [settingTable] Added value validation before saving the setting. [Sami Mokaddem]
+
+* [settingTable] Gracefully handle if file not writeable. [Sami Mokaddem]
+
+* [flood protection] added cleanup. [iglocska]
+
+* [inbox:collectNotifications] Collect notifications for the logged in user. [Sami Mokaddem]
+
+* [ui:header-notification] Added support of variant severity. [Sami Mokaddem]
+
+* [appcontroller] Breadcrumbs and notifications are fetched only if the user is logged in. [Sami Mokaddem]
+
+* [notifications] Support of modal when clicking on notification element. [Sami Mokaddem]
+
+* [inbox:createEntry] Checks for remote back connection is more flexible. [Sami Mokaddem]
+
+  Handle the case of trailing slash
+
+* [outboxProcessors:brood] Gracefully catch server errors on remote broods. [Sami Mokaddem]
+
+* [outboxProcessors:broods] Provide errors while trying to re-send a message. [Sami Mokaddem]
+
+* [brood:connectionTest] Correctly handles network exceptions. [Sami Mokaddem]
+
+* [localtTools:connectionRequest] Provide more info on exception. [Sami Mokaddem]
+
+* [web:deps] Updated font-awesome version from 5.8.2 to 5.15.4. [Sami Mokaddem]
+
+* [inbox:index] Sort messages by created datetime. [Sami Mokaddem]
+
+* [genericELements:index_table] Tabler head accept icons. [Sami Mokaddem]
+
+* [api:index] Serve redoc script directly form the server. [Sami Mokaddem]
+
+* [auditlog:index] Break text in changed column. [Sami Mokaddem]
+
+* [auditlog] Allow filtering and searching the table. [Sami Mokaddem]
+
+* [component:CRUD] Fixed typo. [Sami Mokaddem]
+
+* [ui:api] Moved API navigation link into admin section and created breadcrumb config. [Sami Mokaddem]
+
+* [appController] Don't generate nav breadcrumbs in API context. [Sami Mokaddem]
+
+* [metaTemplate] Better placement of notice message. [Sami Mokaddem]
+
+* [metaTemplate] Added endpoint to load template from disk by uuid. [Sami Mokaddem]
+
+* [genericElement:metafield_panel] Only display notice if the entity has meta fields. [Sami Mokaddem]
+
+* [metaTemplate:index] Improved text. [Sami Mokaddem]
+
+* [metaTemplate] Major refactoring and documentation - WiP. [Sami Mokaddem]
+
+* [component:crud] Renaming the default `all` contextual filter. [Sami Mokaddem]
+
+* [migration] Meta-templates can have duplicated UUID thanks to their version. [Sami Mokaddem]
+
+* [metaTemplate] Update system and conflict resolution interfaces - WiP. [Sami Mokaddem]
+
+* [genericElements:form] Support of more option and radio input. [Sami Mokaddem]
+
+* [scss:bootstrap-additional] Added hover on dropdown items and mw/mh support. [Sami Mokaddem]
+
+* [Component:Navigation] Breadcrumbs get loaded before rendering to have access to view var. [Sami Mokaddem]
+
+  So that it can have access to view variables
+
+* [metaTemplate] Started implementing new update system - WiP. [Sami Mokaddem]
+
+* [component:CRUD] Added comment to be fixed later on - WiP. [Sami Mokaddem]
+
+* [elements:widgets] Slightly refactored highlight panel and removed useless code. [Sami Mokaddem]
+
+* [genericElements:index_table] Immediately save index setting when dropdown menu gets closed. [Sami Mokaddem]
+
+* [helper:bootstrap] Improved dropdown menu badge UI. [Sami Mokaddem]
+
+* [element:index_table] Slight UI adjustement. [Sami Mokaddem]
+
+* Updated .gitignore. [Sami Mokaddem]
+
+* [meta_templates:enisa-csirt-inventory] Simplified regexes. [Sami Mokaddem]
+
+* [meta_templates:individual_extended] Added support of phone number. [Sami Mokaddem]
+
+* [metaFields] Clean-up and improved regex matching. [Sami Mokaddem]
+
+* [helpers:bootstrap] Formatted file. [Sami Mokaddem]
+
+* [sharingGroups] Cleaned useless view variables. [Sami Mokaddem]
+
+* [genericElements:index_table] Added close button for stat widget config UI. [Sami Mokaddem]
+
+* [genericElements:index_table] Continuation of stats for current view - WiP. [Sami Mokaddem]
+
+* [genericElements:index_table] Added support of statistic for current view - WiP. [Sami Mokaddem]
+
+* [element:widget] Added support of condensed UI for highlight-panel. [Sami Mokaddem]
+
+  This could be later on refactored to be formed from smaller views
+
+* [element:bar] better support of passed options. [Sami Mokaddem]
+
+* [appTable] Moved statistics functions out of instanceTable. [Sami Mokaddem]
+
+* [helper:boostrap] Support of list of string for class in card. [Sami Mokaddem]
+
+* [genericElements:index_table] Moved description to a tooltip. [Sami Mokaddem]
+
+  Description describing indexes are great when discovering an app for the first time but start taking important place and become useless when users gets to know the app better. Moving it to a tooltip makes sense in that regard.
+
+* [instance:home] Added support of both `modified` and `created` in stat panels. [Sami Mokaddem]
+
+* [mailinglist:addIndividual] Removed possiblity to edit individual already in the list. [Sami Mokaddem]
+
+  This can be confusing and require special handling when saving joinData
+
+* [Organisation] Moved model to use meta-field behavior instead of association. [Sami Mokaddem]
+
+* [genericElement:index_table] Conditional inclusion of header in column visibility selector. [Sami Mokaddem]
+
+* [genericElement:index] Highlight filtering button if filters are present. [Sami Mokaddem]
+
+* [ui] Renamed search button in index_table. [Sami Mokaddem]
+
+  Search seems more appropriate than filter
+
+* [component:CRUD] Added support of metafield in quickfilter feature. [Sami Mokaddem]
+
+* [genericElement:index_table] Small UI improvement for column visibility selector. [Sami Mokaddem]
+
+* [helper:bootstrap] Support of header in dropdown menu. [Sami Mokaddem]
+
+* [component:CRUD] Small refactoring to improve re-usability. [Sami Mokaddem]
+
+* [genericElement:index_table] Better support of array in generic fields. [Sami Mokaddem]
+
+* [helper:bootstrap] Added support of badge in dropdown menu entries. [Sami Mokaddem]
+
+* [ui:meta_templates] Slightly improved UI. [Sami Mokaddem]
+
+* [behavior:meta_field] Better integration in CRUD and tables. [Sami Mokaddem]
+
+* [navigation] Navigation's actions now relies on modal instead of redirecting to the page. [Sami Mokaddem]
+
+* [ui] Added support of redirections via Ajax responses. [Sami Mokaddem]
+
+* [component:CRUD] Cleanup leftovers comments. [Sami Mokaddem]
+
+* [component:CRUD] Support of validation and re-edition (WiP) [Sami Mokaddem]
+
+* [css:metafields] Improved responsiveness. [Sami Mokaddem]
+
+* [component:CRUD] Actually delete empty metafields on edit. [Sami Mokaddem]
+
+* [element:genericForm] Usage of bootstrap component to generate ajax modal. [Sami Mokaddem]
+
+* [app] More UI improvement for responsiveness. [Sami Mokaddem]
+
+* [app] Various layout improvements for responsiveness. [Sami Mokaddem]
+
+* [metaTemplate] Continuation of refactoring - WiP. [Sami Mokaddem]
+
+  Editing meta field from entities working
+
+* [individual] MailingLists association improved. [Sami Mokaddem]
+
+* [metaTemplate] Started refactoring the whole feature. [Sami Mokaddem]
+
+  Objective of the refactoring is to:
+  Simplified metafields searches and started to add support of multi-field and edition
+
+* [ui] Various UI improvement and cleanup. [Sami Mokaddem]
+
+  New according bootstrap component and small UI enhancements
+
+* [mailinglist] Improved feature. [Sami Mokaddem]
+
+  Previously, emails were stored as json encoded string. To add more flexibility and prevent inconsistencies (such as propagating email changes to the mailing list), it has been moved to a table.
+
+### Fix
+
+* [users] edit. [iglocska]
+
+  - various issues fixed with the edit function
+  - re-added the chance to change organisations of a user as a site admin
+  - tighter checks on the options for the drop downs
+
+* [component:CRUD] Avoid patching entity if it wasn't modified. [Sami Mokaddem]
+
+* [metaFields] Added timestamp behavior. [Sami Mokaddem]
+
+* Error when entity has no meta_fields. [Luciano Righetti]
+
+* [metaTemplate:view] Repair `Field` child. [Sami Mokaddem]
+
+* [metatemplates:index] Pass all needed arguments. [Sami Mokaddem]
+
+* [helpers:bootstrap] Support of cell variant in table. [Sami Mokaddem]
+
+* Remove filter. [Luciano Righetti]
+
+* Remove commented line. [Luciano Righetti]
+
+* Warnings, notices, deprecation errors. [Luciano Righetti]
+
+* Update library, has a boolean validation bug. [Luciano Righetti]
+
+* Bumped ACLComponent. [Sami Mokaddem]
+
+* [sharingrGroup:delete] Missing params variable. [Sami Mokaddem]
+
+* [component:CRUD] Fixed typo massageMetaFields. [Sami Mokaddem]
+
+* [Component:CRUD] Removed confusing `get` parameter. [Sami Mokaddem]
+
+  - It was confusing and using it could lead to unwanted consequences
+  - It's clearer to implement the desired logic on controller's side
+
+* [users:add] Decoupled password required and visibility. [Sami Mokaddem]
+
+* [minor fixes] with the keycloak integration. [iglocska]
+
+* [settings] invalid setting name fixed. [iglocska]
+
+* [instance:searchAll] Get the correct count if after filter is applied. [Sami Mokaddem]
+
+* [sharinggroups:view] Typo skipping org membership check. [Sami Mokaddem]
+
+* [instance:search_all] Support of conditions and afterFind when using global search. [Sami Mokaddem]
+
+* [Component:CRUD] Prevent duplication of first metafield if it was unmodified. [Sami Mokaddem]
+
+* [behavior:metafields] Switch to text filtering if meta-template-field is not provided. [Sami Mokaddem]
+
+* [settings] added test for keycloak enabled. [iglocska]
+
+  - always require one auth method to be enabled
+
+* [alignments] saving of the alignment was omitted before. [iglocska]
+
+* [component:CRUD] Fix edit where query parameters where not passed correctly. [Sami Mokaddem]
+
+  It fixes meta-fields duplication while saving
+
+* [indexTable] Missing argument to display the reload popup. [Sami Mokaddem]
+
+* [Component:CRUD] Typo in merge conflict. [Sami Mokaddem]
+
+* [copy pasta fail] left previous assignment in that is now superseeded by the if branch above. [iglocska]
+
+* [genericTemplates] delete template can be invoked without an ID. [iglocska]
+
+* [misp connector] validations with notEmpty() deprecated, replaced with notEmptyString() [iglocska]
+
+* [flood protection] default to 127.0.0.1 if no remote_addr is set as we're dealing with a local CLI script. [iglocska]
+
+* [error code] adding an authkey for a user you are not authorised to modify resulted in a 404 instead of a 405. [iglocska]
+
+* [tests] changed assertion for authkey failure on insufficient privilege from 404 to 405. [iglocska]
+
+* [security] XSS in the generic action template. [iglocska]
+
+  - a previously assumed internal url can have user input appended via the MISP local tool connector
+  - requires a compromised connected MISP instance where a malicious administrator modifies the UUIDs of cerebrate relevant objects to JS payloads
+
+  - as reported by Dawid Czarcnecki of Zigrin Security
+
+* [flood protection] default to REMOTE_ADDR if the selected default logging IP source header is not populated. [iglocska]
+
+* [security] flood protection control enabled by default. [iglocska]
+
+  - as reported by Dawid Czarnecki from Zigrin Security
+
+* [security] Sharing group creation on behalf of other organisation fixed. [iglocska]
+
+  - org admin could create sharing groups on behalf of other organisations
+  - can lead to misleading sharing groups being created
+
+  - as reported by Dawid Czarnecki of Zigrin Security
+
+* [security] privilege escalation via user edit fixed. [iglocska]
+
+  - org admins could circumvent the role restrictions and elevate themselves to a site admin
+
+  - as reported by Dawid Czarnecki from Zigrin Security
+
+* [settings:settingField] Enforce sanitization of input fields. [Sami Mokaddem]
+
+  - As reported by Dawid Czarnecki from Zigrin Security
+
+* [userSettings] Perform URI validation for bookmarks. [Sami Mokaddem]
+
+  - As reported by Dawid Czarnecki from Zigrin Security
+
+* [userSettings] Renamed template to match the controller endpoint. [Sami Mokaddem]
+
+* [migrations] initial schema migration fixed for upgrades. [iglocska]
+
+  - check if a table has already been created and block the execution for instances that get updated from before the initial schema was retroactively added
+
+* [security] user settings allow enumeration of usernames. [iglocska]
+
+  - as reported by Dawid Czarnecki from Zigrin Security
+
+* [security] open endpoints should only be open when enabled. [iglocska]
+
+  - as reported by Dawid Czarnecki from Zigrin Security
+
+* [security] Sharing group ACL fixes. [iglocska]
+
+  - added indirect object reference protection
+  - added correct ACL functionalities to delete, addOrg, removeOrg
+
+  - as reported by Dawid Czarnecki from Zigrin Security
+
+* [security] genericForm reflected XSS in form descriptions for user controlled descriptions. [iglocska]
+
+  - accessible via the MISP local tool setting change
+  - sanitise the description
+
+  - as reported by Dawid Czarnecki from Zigrin Security
+
+* [sync] created field rules added. [iglocska]
+
+  - should stop issues of SG/Individual downloads from remote brood
+
+* [generic fields] org field URL missing slash fixed. [iglocska]
+
+* [localToolConnectors:MISP] Fixed bad merge. [Sami Mokaddem]
+
+* [templates:common] Removed extra closing tag. [Sami Mokaddem]
+
+* [localToolConnectors:MISP] Fixed typo. [Sami Mokaddem]
+
+* [components:CRUD] Support of controller's paginate public variable. [Sami Mokaddem]
+
+* [genericElements:index_table] Improved positioniong of pagination link for sorting. [Sami Mokaddem]
+
+* [genericElements:tags] List tags when editing an entity. [Sami Mokaddem]
+
+* [themes] Recompiled css file repairing the merge conflict overlooked. [Sami Mokaddem]
+
+* [auditlog] Typo in field name. [Sami Mokaddem]
+
+* [component:CRUD] Filtering view variables get correctly set. [Sami Mokaddem]
+
+* [appTable:table_statistics] Compute timeline only if the fields exist in the DB schema. [Sami Mokaddem]
+
+* [auditlog] Clean up of leftover copy paste. [Sami Mokaddem]
+
+* [metaTemplate] Various fixed on meta-templates updates. [Sami Mokaddem]
+
+* [appTable:activityStatistics] Variation take for the activity of the last x days. [Sami Mokaddem]
+
+* [local_tool:batchApiAction] Various UI and backend fixes. [Sami Mokaddem]
+
+* [instance:searchAll] Correct usage of parameters. [Sami Mokaddem]
+
+* [metaTemplate] Repaired update_all. [Sami Mokaddem]
+
+* [metatemplate] Removed unused code. [Sami Mokaddem]
+
+* [genericTemplates:delete] Make sure to sanitize modal content. [Sami Mokaddem]
+
+* [helper:bootstrap] Support of string and array for badge's class parameter. [Sami Mokaddem]
+
+* [helpers:bootstrap] Make sure to sanitize passed text. [Sami Mokaddem]
+
+* [meta_template:enisa-csirt-inventory] Typo in regex. [Sami Mokaddem]
+
+* [component:CRUD] Regression where entities not supporting metafields couldn't be saved. [Sami Mokaddem]
+
+* [home:ui] Use correct bootstrap class. [Sami Mokaddem]
+
+* [mailinglist] Edition was not possible in some cases. [Sami Mokaddem]
+
+* [ui:sidebar] Correctly add activeSidebarLinkColor to parent element if child is selected. [Sami Mokaddem]
+
+* [Component:CRUD] Pass expected argument. [Sami Mokaddem]
+
+* [behavior:metaField] Wildcard searches now work if the wildcare is placed in front. [Sami Mokaddem]
+
+* [component:CRUD] Correctly inspect the redirect key. [Sami Mokaddem]
+
+* [component:paramHandler] Correctly handle arrays. [Sami Mokaddem]
+
+  Also removed duplicated function
+
+* [element] Made single views aware of multiple meta-fields. [Sami Mokaddem]
+
+* [Component:CRUD] Make set quickfilter works again. [Sami Mokaddem]
+
+  Call the function with correct number of argument
+
+### Other
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge pull request #89 from cerebrate-project/develop-unstable. [Andras Iklody]
+
+  Features extension pack
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge pull request #93 from righel/add-meta-templates-api-tests. [Luciano Righetti]
+
+  new: add api tests for MetaTemplates and openapi spec, fix minor issues.
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge pull request #92 from righel/fix-tests-and-notices. [Andras Iklody]
+
+  Fix tests and notices
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'develop' into main. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into main. [iglocska]
+
+* Update INSTALL.md. [Alexandre Dulaunoy]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'refactor-metatemplates' into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'refactor-metatemplates' into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into refactor-metatemplates. [Sami Mokaddem]
+
+
 ## v1.4 (2022-01-27)
 
 ### New
