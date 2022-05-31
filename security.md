@@ -23,11 +23,11 @@ We firmly believe that, even though unfortunately it is often not regarded as co
 
 ## Advisories
 
-- CVE-2022-25317 
-- CVE-2022-25318
-- CVE-2022-25319
-- CVE-2022-25320
-- CVE-2022-25321
+- [CVE-2022-25317](https://cvepremium.circl.lu/cve/CVE-2022-25317)
+- [CVE-2022-25318](https://cvepremium.circl.lu/cve/CVE-2022-25318)
+- [CVE-2022-25319](https://cvepremium.circl.lu/cve/CVE-2022-25319)
+- [CVE-2022-25320](https://cvepremium.circl.lu/cve/CVE-2022-25320)
+- [CVE-2022-25321](https://cvepremium.circl.lu/cve/CVE-2022-25321)
 
 ## PGP key
 
