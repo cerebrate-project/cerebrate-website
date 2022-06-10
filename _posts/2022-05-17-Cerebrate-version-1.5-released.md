@@ -19,7 +19,7 @@ The strategy used to enroll and update users in keycloak has been reworked. Cere
 
 We have had a large penetration test conducted by Zigrin Security as a follow up of the rework of key aspects of Cerebrate such as user management. We have fixed a series of identified vulnerabilities and weaknesses along with identified usability bugs as part of this release. Besides just fixes, this also resulted in some additional security features such as a registration flood protection. For a full run-down of all fixes refer to the [changelog](https://www.cerebrate-project.org/Changelog.txt) and the [security page](https://www.cerebrate-project.org/security.html) for identified CVEs.
 
-A massive thank you to the Luxembourgish army for funding the penetration test and thereby helping us ensure that our open-source toolchains remain secure and reliable.
+A massive thank you to the Luxembourg Armed Forces for funding the penetration test and thereby helping us ensure that our open-source tool-chains remain secure and reliable.
 
 ## Various usability and UX improvements
 
