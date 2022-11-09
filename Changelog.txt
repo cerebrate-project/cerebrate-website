@@ -1,6 +1,326 @@
 # Changelog
 
 
+## v1.7 (2022-11-09)
+
+### New
+
+* [permission limitations] upgrade script added. [iglocska]
+
+* [permission limitations] subsystem added. [iglocska]
+
+  - add limitations for users with given meta fields
+    - x number / org and y number / globally
+  - add comments to the limitations
+  - enforced on user creation/modification
+
+* [metafields] added view representation of info/warning/danger keys. [iglocska]
+
+* [generic form] added checkbox option for boolean fields in metatemplates. [iglocska]
+
+* [API rearrange] added a simplifier for commonly used objects. [iglocska]
+
+  - let's only return the subset of the data required to identify and retrieve the related data
+
+* [individual] editing enabled for org admins. [iglocska]
+
+  - requires that a user exist for the given individual
+
+* [cnw] meta template for permissions. [iglocska]
+
+  - first revision
+
+* [keycloak] automatically set mappings. [iglocska]
+
+* [user enrollment] send keycloak welcome email to users when enrolled. [iglocska]
+
+* [pgp] library ported from MISP. [iglocska]
+
+  - added proper view elements for encryption keys
+  - added key information extraction
+
+* [scss:boostrap-additional] Added `btn-outline-text` to ease integration with themes. [Sami Mokaddem]
+
+* [user:edit] Added keycloak updates when a user gets modified. [Sami Mokaddem]
+
+* [users] username validation added. [iglocska]
+
+  - >5 && <50 in length required
+  - trim username to test to avoid whitespace names
+
+  - as reported by SK-CERT
+
+* [security] Bruteforce protection added. [iglocska]
+
+  - logins allow for 5 attempts every 5 minutes
+  - Code ported and updated from MISP
+
+  - As reported by SK-CERT
+
+* [component] APIRearrange component added. [iglocska]
+
+  - alter the data's format before passing it back via the RestResponseComponent
+    - to be used to clean up UI specific artifacts / junk
+    - also to maintain compability between versions/tools
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [bootstrap helper] added warning/info/danger fields. [iglocska]
+
+* [encryption keys] rearranged for the API. [iglocska]
+
+* [soacialauth] listener updated to not save the user. [iglocska]
+
+  - it wasn't making any changes anyway, but triggering a slow process
+
+* [CRUD] component - only try to unlink MetaFields if it's actually loaded. [iglocska]
+
+* [user index] API refactored. [iglocska]
+
+* [users] add metafields behaviour. [iglocska]
+
+* [keycloak mapper] also pushes default mappings if they don't exist. [iglocska]
+
+* [User] Entity - added rearrangeForAPI() to rearrange meta fields. [iglocska]
+
+* [keycloak] sync script updated. [iglocska]
+
+* [keycloak] integration rework. [iglocska]
+
+  - switch to the use of attributes
+  - several minor fixes
+
+* [auditLog:entity] unset useless noise from user-settings. [Sami Mokaddem]
+
+* [component:APIRearrange] Rearrange for all iterators. [Sami Mokaddem]
+
+* [indexTable:indexStatistic] better support of themes. [Sami Mokaddem]
+
+* [navigation:socialProvider] Improved UI for SSO profile management. [Sami Mokaddem]
+
+* [genericIndex:select_visible_columns] Show meta-template versions. [Sami Mokaddem]
+
+* [command:keycloakSync] Make sure User model is loaded. [Sami Mokaddem]
+
+* [users:add] Missing comma. [Sami Mokaddem]
+
+* [auditlogs:index] Reverse sort by ID. [Sami Mokaddem]
+
+* [dead variable] removed. [iglocska]
+
+* [security] keycloak enabled - disallow multiple users from being created for the same individual. [iglocska]
+
+  - as reported by SK-CERT
+
+* [navigation] added keycloak self management. [iglocska]
+
+  - also some changes to the navigation system
+
+* [rearrange] moved to Entity. [iglocska]
+
+* [APIRearrange] component tied into rest response. [iglocska]
+
+* [error handler] changed to conform with 4.4. [iglocska]
+
+### Fix
+
+* [keycloak] re-enabled the getUser function, removed the placeholder forced user fetch. [iglocska]
+
+* [API] cleaned up the individual API. [iglocska]
+
+* [API] rearrange component - handle collections correctly. [iglocska]
+
+  - return a new collection with the individual values transferred to it after changes
+  - avoids some weird quirks with unsetting related Objects not taking effect
+
+* [typo] capitalisation mistake blocking org edits. [iglocska]
+
+* [auth] added keycloak logout. [iglocska]
+
+* [return type] validation removed. [iglocska]
+
+* [auditlogs:index] Typo preventing showing the `changed` field. [Sami Mokaddem]
+
+* [metaTemplates:updateAll] Fixed missing form preventing to update. [Sami Mokaddem]
+
+* [metaTemplates] Correctly show update message. [Sami Mokaddem]
+
+* [navigation:meta-template] Correctly show badge for new templates. [Sami Mokaddem]
+
+* [user:beforeSave] Only call the user-update callback if the user is not new. [Sami Mokaddem]
+
+* [behavior:authKeycloak] Correctly check if the user was saved. [Sami Mokaddem]
+
+* [user:validation] Allow user edition when `username` is not set. [Sami Mokaddem]
+
+* [authKeycloakBehavior] Added missing association preventing user to log via keycloak. [Sami Mokaddem]
+
+* [authKeycloakBehavior] Re-indexing array preventing roles to be parsed by keycloak. [Sami Mokaddem]
+
+* [authKeycloakBehavior] Typo preventing roles to be saved. [Sami Mokaddem]
+
+* [migration:unique_usernames] Table 'users' is specified twice, both as a target and as a separate source. [Sami Mokaddem]
+
+* [alignments] missing contains added. [iglocska]
+
+* [authkey] should only be used in a rest context. [iglocska]
+
+  - otherwise some weird authentication snafus can happen
+  - as reported by SK-CERT
+
+* [alignments] fixed invalid urls in alignment fields lacking a / [iglocska]
+
+  - as reported by SK-CERT
+
+* [counter graphs] fixed to disallow invalid interval entries. [iglocska]
+
+  - as reported by SK-CERT
+
+* [alignments] added an index view template. [iglocska]
+
+  - Can't see any usefulness in this, but why not
+
+  - As reported by SK-CERT
+
+* [users] added uniqueness to usernames. [iglocska]
+
+  - added upgrade script with removal of duplicate usernames
+  - added unique index to username field
+  - massaging the usernames before insertion (trim + lowercasing)
+
+  - As reported by SK-CERT
+
+* [security] X-FRAME-OPTIONS: DENY added to all responses. [iglocska]
+
+  - as reported by SK-CERT
+
+* [security] KeyCloak login getUser fixes. [iglocska]
+
+  - removed dead code
+  - tightened check on the user profile, if the KC user's email address and that of the Cerebrate user disagree, block the authentication
+
+  - as reported by SK-CERT
+
+* [single view generic field] allow for unsanitised raw input. [iglocska]
+
+* [xss] resolved in the genericField of the single view. [iglocska]
+
+  - as reported by SK-CERT
+
+* [api rearrange] shouldn't trigger when dealing with arrays. [iglocska]
+
+* [audit log] error due to compressible fields not being streams when compression not enabled. [iglocska]
+
+* [notice] errors when not logged in removed. [iglocska]
+
+* [exception] speculative fix to a check causing a 500. [iglocska]
+
+* [unauthed] users internal error fixed. [iglocska]
+
+* [meta template] fixes. [iglocska]
+
+* [revert] meta fields unindexing. [iglocska]
+
+  - required for the saving of vchanges
+
+* [keycloak] fixed encoding issue with urlencoded usernames created in keycloak. [iglocska]
+
+* [meta] template loading reworked. [iglocska]
+
+  - no more crappy string numeric keys among others
+
+* [deprecation] pagination component's use removed to comply with 4.4 requirements. [iglocska]
+
+* [deprecation] futher toList() call updated. [iglocska]
+
+* [deprecation] toList() queries updated. [iglocska]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge pull request #105 from DocArmoryTech/patch-2. [Andras Iklody]
+
+  Alignment links missing / in 'single' view
+
+* Alignment links missing / [DocArmoryTech]
+
+  When baseurl is configured in the UI as: `https://cerebrate.example.com/` (`App.baseurl` is `https:\/\/cerebrate.example.com\/` in config.json
+
+  a `/` between the `$baseurl` and the url path appears to be missing:
+   - When viewing an individual and their alignments (/individuals/view/123), links to the Organisations in their Alignments are missing a `/`
+   - When viewing an organisation, links to the individuals with an alignment to the organisation are missing a `/`
+
+* Merge pull request #104 from DocArmoryTech/patch-1. [Andras Iklody]
+
+  Alignment links missing / in indexes
+
+* Alignment links missing / [DocArmoryTech]
+
+  When baseurl is configured in the UI as: `https://cerebrate.example.com/` (`App.baseurl` is `https:\/\/cerebrate.example.com\/` in config.json
+
+  a `/` between the `$baseurl` and the url path appears to be missing:
+   - When viewing the index of all individuals (/individuals/index), links to the Organisations in their Alignments are missing a `/`
+   - When viewing an organisation that includes individuals with an alignment, links to the Individuals are missing a `/`
+
+* Merge pull request #101 from jacobkarapatakis/main. [Andras Iklody]
+
+  Install instructions for RHEL
+
+* Install instructions for RHEL. [jk]
+
+
+## v1.6 (2022-06-09)
+
+### New
+
+* [KC] profile link added. [iglocska]
+
+### Changes
+
+* [VERSION] bump. [iglocska]
+
+* [config:bootstrap] Only get file content if config.json exists. [Sami Mokaddem]
+
+* [kc] disabled user capturing. [iglocska]
+
+  - Cerebrate is now authoritative
+
+* [users view] added KC checks for the profile link. [iglocska]
+
+* Revert. [iglocska]
+
+* [audit logs] fix test. [iglocska]
+
+### Fix
+
+* [component:CRUD] Removed deprecation notice when trying to extract without requesting the collection. [Sami Mokaddem]
+
+* [localTools:action] Catch error if local tool's action returned unexpected data. [Sami Mokaddem]
+
+* [helper:bootstrap] Allow HTML param to have value equal to 0. [Sami Mokaddem]
+
+* [user enrollment] fixed via KC. [iglocska]
+
+* [auditlogs] more monkey fixing the logging errors via CLI. [iglocska]
+
+* [audit logs] monkey fix for the missing fields when coming from a CLI query. [iglocska]
+
+* Fix broken test after wiremock-php/wiremock-php upgrade to v2.33. [Luciano Righetti]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+
 ## v1.5 (2022-05-17)
 
 ### New
