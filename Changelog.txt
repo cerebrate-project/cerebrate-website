@@ -1,6 +1,78 @@
 # Changelog
 
 
+## v1.8 (2022-11-14)
+
+### New
+
+* [command] Summary tool to collect changes done by nationalities. [Sami Mokaddem]
+
+  Currently supporting individual, organisation and user
+
+* [individuals] rework. [iglocska]
+
+  - allow modifications for org admins of individuals associated to their users
+    - unless they're site admins
+  - add user information to the individual index to bring clarity to the individual vs users confusion
+  - rework of the user form field object
+
+* [user deletion] tied into KeyCloak. [iglocska]
+
+  - remove user from KC when possible
+  - proceed for local users
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [user index] added column configuration. [iglocska]
+
+* [cleanup] of the default role setting for keycloak. [iglocska]
+
+  - not used in any sensible way anymore
+
+### Fix
+
+* [individual edit] permission check fix. [iglocska]
+
+* [kc] only try to set the signingin url to KC if KC is actually enabled. [iglocska]
+
+* [audit logs] change field changed to mediumblob. [iglocska]
+
+  - AAAAAAAaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAaaaaaaaaaaAAAAAAAAAAaaaaaaaaAAAAAAAAAAAAaaargh
+
+* [pgp key length] extended to mediumtext. [iglocska]
+
+  - Some people drive BMWs, some have pgp keys that exceed the limits of TEXT
+
+* [crud] speculative fix for notice error on metatemplates being accessed that aren't loaded. [iglocska]
+
+* [users] several fixes. [iglocska]
+
+  - User enrollment in KC moved to the aftersave (we consider cerebrate to be authoritative)
+  - adhere to restriction parameters in deletion
+
+* [beforesave] hook removed on get requests. [iglocska]
+
+* [keycloak sync] not needed on user index. [iglocska]
+
+  - was a test that was left in
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge remote-tracking branch 'origin/cli-modification-summary' into develop. [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+
 ## v1.7 (2022-11-09)
 
 ### New
