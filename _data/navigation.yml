@@ -29,6 +29,10 @@ header:
     url: /users.html
 
   - titles:
+      en      : &EN       Security
+    url: /security.html
+
+  - titles:
       # @start locale config
       en      : &EN       About
       en-GB   : *EN
@@ -52,3 +56,6 @@ header:
       fr-LU   : *FR
       # @end locale config
     url: /about.html
+  - titles:
+      en      : &EN      Documentation
+    url: https://doc.cerebrate-project.org/
