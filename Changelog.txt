@@ -1,6 +1,509 @@
 # Changelog
 
 
+## v1.12 (2023-02-21)
+
+### New
+
+* [crud:auditlog] Added auditlogs for entity being viewed. [Sami Mokaddem]
+
+* [metaTemplate:metaFieldMigration] Added support of force migrate. [Sami Mokaddem]
+
+  Remove conflicting meta-fields and migrate non-conflicting ones
+
+* [js-bootstrap:quickConfirm] Added quickConfirm UI element to create a confirmation popover to confirm actions. [Sami Mokaddem]
+
+* [js-bootstrap:popover] Added support of popover in bootstrap-helper. [Sami Mokaddem]
+
+* [meta-template] Improvement of the update system. [Sami Mokaddem]
+
+  - Changed default update strategy from `create_new` to `update_existing`
+  - Added mechanism to automatically migrate meta-fields to newest template
+  - Improved validation and conflict detection strategies
+  - Fixed various UI bugs and improved QoL
+
+* [element:index_table] Added possibility to download current table based on filters. [Sami Mokaddem]
+
+* [sync+meta_fields] Initial work on meta_field synchronisation and meta_template_directory - WiP. [Sami Mokaddem]
+
+  The new directory allows to ingest meta_fields without knowing their associated meta_template. Improved the way data is re-arranged, how meta-templates are saved and a helper widget showing the difference local objects have with their remote counter-part
+
+* [utility:utils] Added utils file and support of arary_diff_recursive. [Sami Mokaddem]
+
+* [bootstrap-helper:badge] Added support of ID and icon. [Sami Mokaddem]
+
+* [css:bootstrap-additional] Added table-xs class. [Sami Mokaddem]
+
+### Changes
+
+* [users:index] Added setting to allow the deletion of users. [Sami Mokaddem]
+
+  Fix #119
+
+* [metaTemplate:updateStrategyDelete] Restored strategy to update a template and delete conflicting metafields. [Sami Mokaddem]
+
+* [js-bootstrap] Added new quick function to display a modal from an URL. [Sami Mokaddem]
+
+* [js-utils:sanitize] Added sanitization function. [Sami Mokaddem]
+
+* [metaTemplate:migrateMetaField] Ignore metafield with empty value. [Sami Mokaddem]
+
+* [inboxProcessor:dataChange] Further improved UI and readability. [Sami Mokaddem]
+
+* [bootstrap:collapse] Allow disabling card formating. [Sami Mokaddem]
+
+* [inboxProcessor:NotificationDatachange] Improved readability. [Sami Mokaddem]
+
+* [brood:queryIndex] Added support of pagination and filtering. [Sami Mokaddem]
+
+* [crud:index] Added better support of pagination for API. [Sami Mokaddem]
+
+* [users:index] Includes metafields by default when API query. [Sami Mokaddem]
+
+* [genericTemplates:toggle] Added support of confirm modal. [Sami Mokaddem]
+
+* [boostrapElement:dropdownMenu] Added support of `attrs` parameter for menu entry. [Sami Mokaddem]
+
+* [organisations:index] Always include metafields for API requests. [Sami Mokaddem]
+
+* [broods:testConnection] Prematurely close session to allow concurrent requests. [Sami Mokaddem]
+
+* [BootstrapHelper:dropdownMenu] Added support of class for menu entries. [Sami Mokaddem]
+
+* [BootstrapHelper:modal] Added support of scrolling in modal body. [Sami Mokaddem]
+
+  - For the pleasure of @iglocska
+
+* [organisations:index] Added support of `full` option to include metafields. [Sami Mokaddem]
+
+* [genericTemplate:confirm] Usage of BootstrapHelper\Modal. [Sami Mokaddem]
+
+* [js:bootstrap-helper] Improved table building mechanism. [Sami Mokaddem]
+
+* [js:bootstrap-helper] Added support of modal size. [Sami Mokaddem]
+
+* [install:nginx] Cerebrate now expect php8+ [Sami Mokaddem]
+
+* [element:metafield_panel] Metafield now relying on their index type when being displayed on singleViews. [Sami Mokaddem]
+
+* [elements:settings-notice] Improved UI. [Sami Mokaddem]
+
+* [helper:bootstrap] Added more documentation and typing. [Sami Mokaddem]
+
+* [helper:bootstrap] Added documentation. [Sami Mokaddem]
+
+* [helper:bootstrapModal] Improved doc. [Sami Mokaddem]
+
+* [layout:user_profile] Improved UI. [Sami Mokaddem]
+
+* [herlper:bootstrap] Major refactor of the BootstrapHelper to make it more modular + added documentation. [Sami Mokaddem]
+
+* [version] bump. [iglocska]
+
+* [component:CRUD] Added validation of order fields. [Sami Mokaddem]
+
+### Fix
+
+* [crud:renderInVariable] Fixed deprecation notice. [Sami Mokaddem]
+
+* [users:index] Removed deletion button for self. [Sami Mokaddem]
+
+  Fix #118
+
+* [sharingGroups:addOrg] Use correct index to add to the group. [Sami Mokaddem]
+
+* [ui:migrateMetaFields] Fixed total number of items displayed. [Sami Mokaddem]
+
+* [bootstrap:table] Fixed typo and pass field config for indexed arrays. [Sami Mokaddem]
+
+* [crud:index] Only include requested metafields for non-API queries. [Sami Mokaddem]
+
+* [navigation:metaTemplates] Allow toggling template enabled state. [Sami Mokaddem]
+
+* [encryptionKeys:index] Typo in fingerprint column. [Sami Mokaddem]
+
+* [metaFields] Fixed typo in function. [Sami Mokaddem]
+
+* [metaTemplateDirectory:create] Added gracefully handle uniqueness. [Sami Mokaddem]
+
+* [user:rearrangeForAPI] Fixed support of metafields. [Sami Mokaddem]
+
+* [command:fastUserEmrolment] Typo in condition showing the wrong warning for the faulty entity. [Sami Mokaddem]
+
+* [ui:connectionTestResult] Only display error once. [Sami Mokaddem]
+
+* [command:fastEnrolment] Coorrectly display missing organisation instead of throwing an error. [Sami Mokaddem]
+
+* [users:view] Temporary measure to gracefully catch connection issue with keycloak. [Sami Mokaddem]
+
+* [bootstrap-helper:table] Relax some argument typing. [Sami Mokaddem]
+
+* [user:login] Added support of `redirect` after login. [Sami Mokaddem]
+
+* [brood:preview] Restored searching capability on browsing. [Sami Mokaddem]
+
+* [genericTemplate:delete] Fixed usage of BootstrapElement\BootstrapModal. [Sami Mokaddem]
+
+* [elements:setting-search] Fixed typo. [Sami Mokaddem]
+
+* [layout:formLayouts] Use correct parameter for accordion header. [Sami Mokaddem]
+
+* [command:fastUserEmrolment] Typo in condition showing the wrong warning for the faulty entity. [Sami Mokaddem]
+
+* [command:fastEnrolment] Coorrectly display missing organisation instead of throwing an error. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop-unstable' into develop. [Sami Mokaddem]
+
+* Merge branch 'chg-sync-improvements' into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into chg-bootstrap-elements. [Sami Mokaddem]
+
+* Merge branch 'develop-unstable' into chg-bootstrap-elements. [Sami Mokaddem]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge pull request #123 from kamil-certat/fix-nginx-socket. [Alexandre Dulaunoy]
+
+  Update PHP socket to version-agnostic
+
+* Update PHP socket to version-agnostic. [kamil-certat]
+
+  The nginx example config refers to PHP 7 FPM socket,
+  but the newer version is recommended. Changing it to the
+  non-versioned socket to allow quick start.
+
+
+## v1.11 (2023-01-18)
+
+### New
+
+* [command:fastUserEnrolment] Added script to create alignment and enroll users from a provided CSV. [Sami Mokaddem]
+
+  - The individual and Organisation must already exist in Cerebrate. They can be created using the ImporterCommand script
+
+* [command:metaTemaplate] Added meta-template shell to create and enabled template by UUID. [Sami Mokaddem]
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [alignment] Added validation rule to avoid duplicates. [Sami Mokaddem]
+
+* [alignments:add] Usage of select2 for org selector. [Sami Mokaddem]
+
+* [ui:genericDropdownField] Allow using select2 on dropdown field. [Sami Mokaddem]
+
+* [ui:generic_index] Only show enabled meta-templates in table options. [Sami Mokaddem]
+
+### Fix
+
+* [command:fastUserEnrolment] Better parsing of options and removed test instructions. [Sami Mokaddem]
+
+* [command:importer] FIxed several bug preventing the save to happen. [Sami Mokaddem]
+
+* [command:fieldSquasher] Allow persistence of changes. [Sami Mokaddem]
+
+* [behavior:authKeycloak] Correctly URLEncode username. [Sami Mokaddem]
+
+* [alignments:add] Index individuals and orgs by ID instead of array index. [Sami Mokaddem]
+
+* [permissionLimitations] Prevent error for org without users. [Sami Mokaddem]
+
+* [broods:add] Correctly index organisations by their ID. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+
+## v1.10 (2023-01-03)
+
+### New
+
+* [doc] gitchangelog.rc added. [Alexandre Dulaunoy]
+
+### Changes
+
+* [INSTALL] 20.04. [David Cruciani]
+
+* [version] bump. [iglocska]
+
+* [skeleton module] added extra explanations. [iglocska]
+
+### Fix
+
+* [security] destroy session on logout. [iglocska]
+
+  - As reported by Matúš Mikuláš, Adam Gajdošík, Milan Pikula of SK-CERT
+
+* [keycloak status] - handle gracefully if user not found in KC. [iglocska]
+
+  - As reported by Matúš Mikuláš, Adam Gajdošík, Milan Pikula of SK-CERT
+
+* [security] disallow multiple individuals with the same e-mail address. [iglocska]
+
+  - As reported by Matúš Mikuláš, Adam Gajdošík, Milan Pikula of SK-CERT
+
+* [validation] Tightened the validation rules for users to avoid 500 errors when the requirements are not met. [iglocska]
+
+  - ensure that username is unique
+  - (optional) ensure that individual->user assignment is unique
+  - (optional) ensure that usernames are e-mail addresses
+
+  - As reported by Matúš Mikuláš, Adam Gajdošík, Milan Pikula of SK-CERT
+
+* [security] reworked the Individual handling of user creations / modifications. [iglocska]
+
+  - creating a new user with the e-mail address of an already existing individual should NOT overwrite the first/last name fields
+  - it merely connects the individual to the new user
+
+  - disallow changing the individual behind an existing user altogether
+  - allow capturing individuals without updates
+
+  - As reported by Matúš Mikuláš, Adam Gajdošík, Milan Pikula of SK-CERT
+
+* [users] handle saving of a user without KC. [iglocska]
+
+* [security] fixed ACL for the user view endpoint. [iglocska]
+
+  - arbitrary resource access fixed
+
+  - As reported by Matúš Mikuláš, Adam Gajdošík, Milan Pikula of SK-CERT
+
+### Other
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* Merge pull request #122 from DavidCruciani/main. [Andras Iklody]
+
+  chg: [INSTALL] 20.04
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* Update INSTALL.md. [Andras Iklody]
+
+
+## v1.9 (2022-12-14)
+
+### New
+
+* [custom attribute saving] wip. [iglocska]
+
+* [users:view] Added keycloak status showing the potential differences between Cerebrate and Keycloak. [Sami Mokaddem]
+
+* [metaTemplateField] Added `index_type` virtual property to use the correct index_table element. [Sami Mokaddem]
+
+* [inbox:index] Added support of various context filtering. [Sami Mokaddem]
+
+  - My notification includes message without user_ids
+  - User registration
+  - Inter-connection requests
+  - Data changed
+  - severity:*
+
+* [listTopBar:contextFilters] Added support of element to generate filter content. [Sami Mokaddem]
+
+* [element:bootstrapUI] To create HTML from BootrstrapHelper by using element. [Sami Mokaddem]
+
+* [metaFields] Adding support of sane_default + improving form & crud - WiP. [Sami Mokaddem]
+
+* [genericElement:group_table_action] Added support of `show # element` in the table. [Sami Mokaddem]
+
+* [ui:index_table] Fire pending debounced functions on dropdown hidden. [Sami Mokaddem]
+
+* [organisation] Added `notifyAdmin` behavior. [Sami Mokaddem]
+
+  Might be removed later on if needed
+
+* [user] Added `notifyAdmin` behavior. [Sami Mokaddem]
+
+* [adminNotificationBehavior] Added first version of new behavior and associated inboxProcessor. [Sami Mokaddem]
+
+  This behavior allows to specify on which fields modification site-admins should be notified by receiving a message in their inbox
+
+* [inboxes] Added `severity` level and `message` and removed `description` column. [Sami Mokaddem]
+
+### Changes
+
+* [param] order changed. [iglocska]
+
+* [version] bump. [iglocska]
+
+* Php version requirement bumped. [Andras Iklody]
+
+* [behavior:keycloak] Gracefully handle issues while syncing with keycloak. [Sami Mokaddem]
+
+* [behavior:keycloak] Perform case insensitive comparison. [Sami Mokaddem]
+
+  For both cerebrate and keycloak users
+
+* [users:index] Added comment. [Sami Mokaddem]
+
+* [cnw permissions] added mailing list. [iglocska]
+
+* [genericElement:fieldScaffold] Let cake's form helper decide the input type if not specified. [Sami Mokaddem]
+
+* [permissionslimitations:add] Forced comment type to be textarea. [Sami Mokaddem]
+
+* [permissionlimitation:validation] Added rule for max_occurence. [Sami Mokaddem]
+
+* [users:edit] Added role associated data for the user to be edited. [Sami Mokaddem]
+
+* [user:NotifyAdminBehavior] Track modification on meta_fields. [Sami Mokaddem]
+
+* [command:summary] Added support of destination folder. [Sami Mokaddem]
+
+* [genericElement:index_table] Use provided element for the metafields. [Sami Mokaddem]
+
+* [organisation:index] Added quickfilter showing all orgs having the same nationality as logged user.org. [Sami Mokaddem]
+
+* [organisation:index] Removed ENISA-specific quick filters. [Sami Mokaddem]
+
+  But kept them as develop documentation...
+
+* [inbox:filtering] Possibility to filter on severity. [Sami Mokaddem]
+
+* [processors] Added adequate severity for some inbox/outbox processors. [Sami Mokaddem]
+
+* [auditLogs:index] Added possibility to view and filter logs base on `created` field. [Sami Mokaddem]
+
+* [metaTemplateField] More generic way to specify form type. [Sami Mokaddem]
+
+* [layout:notification-menu] Improved spacing and size. [Sami Mokaddem]
+
+* [ui:layout] Added spacing between toast. [Sami Mokaddem]
+
+* [inbox:index] Added filtering on `created` time. [Sami Mokaddem]
+
+* [component:CRUD] Improved filtering to support form type based on database column type. [Sami Mokaddem]
+
+* [inbox:index] Added quick filter on scope. [Sami Mokaddem]
+
+* [behavior:notifyAdmin] Small refactor to better handle deletions. [Sami Mokaddem]
+
+* [behavior:adminNotification] Added support of watched fields and improved metafield integration. [Sami Mokaddem]
+
+* [inbox:index] Allow filtering index by user.id and user.name. [Sami Mokaddem]
+
+* [js:bootstrap-helper] Allow closing success toast without title. [Sami Mokaddem]
+
+* [helper:bootstrap] Added support of icon in confirm modal button. [Sami Mokaddem]
+
+* [js:api-helper] Show feedback for failure in postForm. [Sami Mokaddem]
+
+* [appTable] Set string format of FrozenTime to ISO 8601-like by default. [Sami Mokaddem]
+
+* [inboxes:UI] Renamed `request` into `message` [Sami Mokaddem]
+
+* [inbox:index] Changed quick filter to show `my notification` by default. [Sami Mokaddem]
+
+* [inboxProcessor:generic] Updated to not rely on deprecated parameters anymore. [Sami Mokaddem]
+
+### Fix
+
+* [kc] attribute update fixed. [iglocska]
+
+* [users:view] Gracefully handle the case where user exist in cerebrate but not in keycloak. [Sami Mokaddem]
+
+* [behavior:notifyAdmin] Removed required parameter after optional. [Sami Mokaddem]
+
+* [users:registration] Fixed and improved user registration. [Sami Mokaddem]
+
+* [behavior:keycloak] Trying to lower fever the best I can. [Sami Mokaddem]
+
+* [genericElement:keycloakStatus] Typo fixed. [Sami Mokaddem]
+
+* [crud:edit] Always specify the table alias when fetching by id. [Sami Mokaddem]
+
+* [user:checkPermissionRestriction] Refactor the function to support more edge-cases. [Sami Mokaddem]
+
+* [permissionlimitation:getLimitations] Mirror the permission limit if only one scope (global or org) is defined. [Sami Mokaddem]
+
+* [permissionlimitations:view] Typo for max_occurence path. [Sami Mokaddem]
+
+* [users:view] Fallback value if Keycloak was never configured. [Sami Mokaddem]
+
+* [user:add/edit] Correctly index orgs by their IDs. [Sami Mokaddem]
+
+* [behavior:notifyAdmins] Typo resetting a variable. [Sami Mokaddem]
+
+* [user:beforeSave] Make sure variable is initialized. [Sami Mokaddem]
+
+* [organisation:index] Indentation fix. [Sami Mokaddem]
+
+* [genericTemplates:filters] Make sure to always return a string when fetching data. [Sami Mokaddem]
+
+* [outboxProcessor:generic] Added support of severity. [Sami Mokaddem]
+
+* [instance:settings] Revert setting back to its original in case of failure. [Sami Mokaddem]
+
+* [crud:index] requestedEntryAmount doesn't reset the query anymore. [Sami Mokaddem]
+
+* [metafields:dropdown] Patched saving multiple fields with custom value. [Sami Mokaddem]
+
+* [metafields:dropdown] Patched saving multiple fields with custom value. [Sami Mokaddem]
+
+* [helper:boostrap] Make sure all properties are passed to the button component. [Sami Mokaddem]
+
+* [inboxProcessor:dataChange] Template clean-up. [Sami Mokaddem]
+
+* [behavior:tag] Get identifier if tag data is an array. [Sami Mokaddem]
+
+* [component:CRUD] Default custom contextual filters do not override search parameters anymore. [Sami Mokaddem]
+
+* [template:genericFilters] Do not fail if tag selector container doesn't exist. [Sami Mokaddem]
+
+* [component:CRUD] Only show metafields filters wjen the model has the behavior. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'kc_fix' into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop-unstable' into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Security: [users:edit] Prevent edit of all users with lower privileges by any org_admins. [Sami Mokaddem]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'feature-metafield-dropdown' into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'feature-metafield-dropdown' of github.com:mokaddem/cerebrate into feature-metafield-dropdown. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into feature-metafield-dropdown. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop-unstable. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+
 ## v1.8 (2022-11-14)
 
 ### New
