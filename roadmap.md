@@ -31,4 +31,4 @@ Cerebrate roadmap is based on requirements from our use-cases and users actively
 
 ## Funding and influencing the roadmap
 
-If your organisation is looking after new functionalities inside Cerebrate. Services similar to the [MISP Professional Services](https://www.misp-project.org/professional-services/) can be requested. You can contact us via [info@circl.lu](mailto:info@circl.lu). 
+If your organisation is looking for new functionalities in Cerebrate or other support services similar to the [MISP Professional Services offerings](https://www.misp-project.org/professional-services/), they can be requested by contacting us via [info@circl.lu](mailto:info@circl.lu). 
