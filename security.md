@@ -29,6 +29,7 @@ We firmly believe that, even though unfortunately it is often not regarded as co
 - [CVE-2022-25320](https://cvepremium.circl.lu/cve/CVE-2022-25320)
 - [CVE-2022-25321](https://cvepremium.circl.lu/cve/CVE-2022-25321)
 - [CVE-2023-26468](https://cvepremium.circl.lu/cve/CVE-2023-26468) >= Cerebrate 1.12
+- [CVE-2023-28883](https://cvepremium.circl.lu/cve/CVE-2023-28883) -  In Cerebrate 1.13, a blind SQL injection exists in the searchAll API endpoint. 
 
 ## PGP key
 
