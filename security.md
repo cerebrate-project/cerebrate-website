@@ -28,8 +28,9 @@ We firmly believe that, even though unfortunately it is often not regarded as co
 - [CVE-2022-25319](https://cvepremium.circl.lu/cve/CVE-2022-25319)
 - [CVE-2022-25320](https://cvepremium.circl.lu/cve/CVE-2022-25320)
 - [CVE-2022-25321](https://cvepremium.circl.lu/cve/CVE-2022-25321)
-- [CVE-2023-26468](https://cvepremium.circl.lu/cve/CVE-2023-26468) >= Cerebrate 1.12
+- [CVE-2023-26468](https://cvepremium.circl.lu/cve/CVE-2023-26468) <= Cerebrate 1.12
 - [CVE-2023-28883](https://cvepremium.circl.lu/cve/CVE-2023-28883) -  In Cerebrate 1.13, a blind SQL injection exists in the searchAll API endpoint. 
+- [CVE-2023-41363](https://cvepremium.circl.lu/cve/CVE-2023-41363) <= Cerebrate 1.14 - In Cerebrate 1.14, a vulnerability in UserSettingsController allows authenticated users to change user settings of other users.  
 
 ## PGP key
 
