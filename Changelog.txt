@@ -1,6 +1,198 @@
 # Changelog
 
 
+## v1.16 (2023-09-13)
+
+### New
+
+* [org Groups] added. [iglocska]
+
+  - Org Groups allow user co-management of sub communities
+    - Create an org group with a set of organisations
+    - assign administrators to an org group
+    - org group admins can modify users of the group
+
+### Changes
+
+* [users:acl] Improved waterfall model for CRUD operation and updated UI to reflect them. [Sami Mokaddem]
+
+* [ui] Improved reflection of ACL logic in the UI for OrgGroups, Organisations and individuals. [Sami Mokaddem]
+
+* [VERSION] bump. [iglocska]
+
+* [alignments:acl] Reflected ACL logic from individuals to alignments. [Sami Mokaddem]
+
+* [users:edit] Allow users to self edit. [Sami Mokaddem]
+
+* [user-settings:edit] Prevent assigning a setting to another user. [Sami Mokaddem]
+
+* [command:summary] Added data about the modified entity. [Sami Mokaddem]
+
+* [navigation:tags] Updated UI to reflect users' permissions. [Sami Mokaddem]
+
+* [navigation:individuals] Only show edit and deletion buttons if users are allowed to do it. [Sami Mokaddem]
+
+* [genericElements:numberOfElement] Added parameter to show or not the `show all` option. [Sami Mokaddem]
+
+* [ACL:tags] Relaxed ACL on tags for index and view pages. [Sami Mokaddem]
+
+* [ACL:individual/add] Allow `org-admin`s to create new individuals. [Sami Mokaddem]
+
+### Fix
+
+* [ACL] group admins can view users in their group. [iglocska]
+
+* [internal] fixed the function checking if a user belongs to the current User's managed org group. [iglocska]
+
+* [acl:canEditUser] Typo in table name. [Sami Mokaddem]
+
+* [OrgGroups:checkIfGroupAdmin] Consider site_admins as group admin. [Sami Mokaddem]
+
+* [strict typing] Made Sami's frankenstein setup happy. [iglocska]
+
+* [temp] ACL function built up. [iglocska]
+
+* [ACL] fixes. [iglocska]
+
+* [org admins] should be able to edit the org. [iglocska]
+
+* [individual:edit] Select individuals based on their id and not their user_id. [Sami Mokaddem]
+
+* [navigation:CRUDAction-auditlogs] Make ordering by created field unambigous and hide audit button to non-admin users. [Sami Mokaddem]
+
+* [userSettings:add] Aded check to avoid duplicated setting for the same user. [Sami Mokaddem]
+
+* [mailinglist:ACL] Fixed bug in ACL check for access. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+
+## v1.15 (2023-09-04)
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [misisng] change. [iglocska]
+
+* [internal] fetch first role if no default is set. [iglocska]
+
+* [command:summary] Consider perm meta-fields addition/deletion as uesr edit. [Sami Mokaddem]
+
+* [config] Force usage of secure cookie for session and csrf protection. [Sami Mokaddem]
+
+* [component:CRUD] Include meta-fields in REST queries and clever pagination support for REST queries. [Sami Mokaddem]
+
+* [command:summary] Added support of user MetaFields. [Sami Mokaddem]
+
+  Allow to show addition and deletion of user metafields such as the ones used for permissions
+
+### Fix
+
+* [security] user settings editable by arbitrary user fixed. [iglocska]
+
+  - as reported by Infigo on behalf of ENISA
+
+* [internal] user add fix attempt #2. [iglocska]
+
+* [userSettings:edit] Correctly pre-select user to be edited. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Update INSTALL.md. [Andras Iklody]
+
+* Update INSTALL.md. [Andras Iklody]
+
+  some minor fixes
+
+
+## v1.14 (2023-05-31)
+
+### New
+
+* [enumerations] added enumerations system. [iglocska]
+
+  - for string entry fields, simply add lists of values to convert the text entry for values
+  - helps with maintaining accurate lists
+  - currently the fields that are valid targets are organisations.nationality, organisations.sector, organisations.type
+
+* [enumerations] schema update added. [iglocska]
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [CRUD] allow for sorting on related model fields. [iglocska]
+
+  - some hacks to resolve issues with sorting on related fields
+
+* [command:importer] Make sure to use the latest known version of the template. [Sami Mokaddem]
+
+* [command:importer] Make sure to use the latest known version of the template. [Sami Mokaddem]
+
+* [UI:saas] Clean-up css files and improved sidebar behavior and rendering for all themes. [Sami Mokaddem]
+
+### Fix
+
+* [users] added the country information to the index / view. [iglocska]
+
+* [genericElements:formInfo] Removed unused portion of code. [Sami Mokaddem]
+
+* [security] blind SQL injection in searchAll. [Sami Mokaddem]
+
+  - As reported by Zigrin Security
+
+* [meta-template-name-directory] Do not access property from null object. [Sami Mokaddem]
+
+* [meta-template-direcotry:index] Pass baseurl to the anonymous function. [Sami Mokaddem]
+
+* [metaTemplateDirectory:index] No static call anymore. [Sami Mokaddem]
+
+* [template:registration] Correct usage of modal parameters. [Sami Mokaddem]
+
+* [template:update_all] Correct usage of modal parameters. [Sami Mokaddem]
+
+* [helper:formFieldMassage] Correctly check for key to avoid debug output. [Sami Mokaddem]
+
+* [app:js] Removed log forgotten console log output. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' into main. [Sami Mokaddem]
+
+
 ## v1.13 (2023-03-13)
 
 ### New
