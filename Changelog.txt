@@ -1,6 +1,87 @@
 # Changelog
 
 
+## v1.17 (2023-11-03)
+
+### New
+
+* [CRUD:index] Allow exporting data into csv. [Sami Mokaddem]
+
+  - Added CSVConverter tool and CSV server request detector
+
+* [MISP connector] sync updated to properly support sharing group exchanges. [iglocska]
+
+* [topology improvements] added acl, menu access, downloader. [iglocska]
+
+* [topology UI] added. [iglocska]
+
+* [UI] mermaid.js added. [iglocska]
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [users:index] Added support of table filtering. [Sami Mokaddem]
+
+* [wip] sharing group rework / MISP connector improvements. [iglocska]
+
+* [indexes] Added `select all` option for some tables. [Sami Mokaddem]
+
+* [temp] run actions in this branch. [Luciano Righetti]
+
+### Fix
+
+* [orggroups:ui] Aligned UI with what users can actually do. [Sami Mokaddem]
+
+* [users:settings] Take into consideration perm-org-group-admin when editing users settings. [Sami Mokaddem]
+
+* [users:edit] Correctly take into consideration perm-org-group-admin. [Sami Mokaddem]
+
+* [genericElements:alignmentField] Use correct URL for individual entries. [Sami Mokaddem]
+
+* [topology] various fixes. [iglocska]
+
+* [brood preview] indeces fixed. [iglocska]
+
+* [topology] added missing view. [iglocska]
+
+* Fix tests. [Luciano Righetti]
+
+* Failing test, due to different user. [Luciano Righetti]
+
+* Fix tests, move e2e tests to a separate suite. [Luciano Righetti]
+
+* Check for required plugins online, the number makes the test fragile as debug plugins may or not be present when running the tests. [Luciano Righetti]
+
+* Fix most of the tests. [Luciano Righetti]
+
+* Fix some deprecation notices in 8.2. [Luciano Righetti]
+
+* Nodejs deprecation notice. [Luciano Righetti]
+
+* Update target php version. [Luciano Righetti]
+
+* [component:CRUD] Do not limit results if the limit query parameter is not provided. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge pull request #151 from righel/fix-test-action. [Luciano Righetti]
+
+  fix: fix test workflow action
+
+
 ## v1.16 (2023-09-13)
 
 ### New
