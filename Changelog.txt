@@ -1,6 +1,41 @@
 # Changelog
 
 
+## v1.18 (2023-12-20)
+
+### New
+
+* [settings:inbox.data_change_notify_for_all] Added setting to be more verbose for data changes. [Sami Mokaddem]
+
+* [CRUD:Filtering] Added support of options in index filtering modal. [Sami Mokaddem]
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [inboxes:filtering] Populate username with eligible users in filtering modal. [Sami Mokaddem]
+
+* [crud:index] Include all meta-fields regardless of user's preference when in REST context. [Sami Mokaddem]
+
+* [MISP connector] added bulk org pull. [iglocska]
+
+### Fix
+
+* [inboxes:index] Fixed pagination target key. [Sami Mokaddem]
+
+* [component:CRUD] Make sure not to override table aliases when paginating. [Sami Mokaddem]
+
+* [individual:validation] Enforce email format to be a valid email address. [Sami Mokaddem]
+
+* [behavior:notifyAdmins] Fixed typo in date serialization. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+
 ## v1.17 (2023-11-03)
 
 ### New
