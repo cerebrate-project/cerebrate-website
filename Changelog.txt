@@ -1,6 +1,91 @@
 # Changelog
 
 
+## v1.19 (2024-05-15)
+
+### New
+
+* [settings] added the session settings to the UI. [iglocska]
+
+* [encryption key index] added search by org name / individual email. [iglocska]
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [inbox] changed user field's column name to "to" [iglocska]
+
+  - it was confusing what was meant
+
+* [users:filtering] Added dropdown for users filtering. [Sami Mokaddem]
+
+* [individuals:filtering] Added dropdown for organisation filtering. [Sami Mokaddem]
+
+* [users:index] Added confirmation modal before changing disabled state for users. [Sami Mokaddem]
+
+* [component:CRUD] Mirrored changes done in MISP3's CRUD component. [Sami Mokaddem]
+
+### Fix
+
+* [autkey expiration] has to be in the future. [iglocska]
+
+* [settings] invalid bootstrap loading of config.json. [iglocska]
+
+  - it was dependent on the app_local.php file existing
+
+* [settings] make sure they are always loaded. [iglocska]
+
+* [settings] numeric fields in settings didn't show current value. [iglocska]
+
+* [index pagination] caps the index at 100 elements. [iglocska]
+
+* [Group admins] can now edit org metainformation for the managed orgs. [iglocska]
+
+* [group admin] be able to add users for the administered orgs. [iglocska]
+
+* [component:CRUD] Make sure to append model alias when ordering results. [Sami Mokaddem]
+
+* [genericTemplates:filters] Fixed encoding typo. [Sami Mokaddem]
+
+* [encryptionKeys:add] Make sure to compare owner_id with individual_id. [Sami Mokaddem]
+
+* [encryptionKeys:ui] Aligned UI with what users can actually do. [Sami Mokaddem]
+
+* [app] Fixed some deprecation notices. [Sami Mokaddem]
+
+* [keycloak] user enrollment now syncs permissions correctly. [iglocska]
+
+* [app:bootstrap] Automatically cast `debug` setting in bootstrap.php to migrate config. [Sami Mokaddem]
+
+* [keycloak] sync metafields on user creation. [iglocska]
+
+* [keycloak] increase fetch users limit to 99999. [iglocska]
+
+* [setting:cerebrate] Enforce debug setting to be true or false. [Sami Mokaddem]
+
+* [tool] fix unitialized var when no SG exist. [Christophe Vandeplas]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'refacto/CRUDComponent' into develop. [Sami Mokaddem]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into main. [Sami Mokaddem]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate into main. [Sami Mokaddem]
+
+* Merge pull request #163 from cvandeplas/fix/SG. [Andras Iklody]
+
+  fix: [tool] fix uninitialised var when no SG exist
+
+
 ## v1.18 (2023-12-20)
 
 ### New
