@@ -1,6 +1,138 @@
 # Changelog
 
 
+## v1.23 (2024-08-27)
+
+### New
+
+* [metafield editor permission] added. [iglocska]
+
+  - users/org admins/group admins/community admins can now only modify metafield data on any object if the permission is set for their role
+  - Since some communities use this for ACL to secondary tools, this will allow them to restrict who can modify them
+
+### Changes
+
+* [version] bump. [iglocska]
+
+
+## v1.22 (2024-08-24)
+
+### New
+
+* [administration] allow group/org admins to edit individuals aligned to their managed orgs. [iglocska]
+
+  - based on alignment
+
+* [permissions] split of admin and community admin. [iglocska]
+
+### Changes
+
+* [migration] minor fix for rerunability. [iglocska]
+
+* [version] bump. [iglocska]
+
+* [cleanup] removed older revision of upgrade script. [iglocska]
+
+### Fix
+
+* [metafield limitation] fixes. [iglocska]
+
+  - correctly show error messages on user creation when limits are hit
+  - fixed a bug that cause users from being uncreatable even due to a hit limitation, even if the current user wouldn't influence said limitation
+
+* [community admin] fixes. [iglocska]
+
+* [ACL component] fixes. [iglocska]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'perm_community_admin' into develop. [iglocska]
+
+
+## v1.21 (2024-07-02)
+
+### New
+
+* [extended logger] added. [iglocska]
+
+  - Added more information about the request to the stack traces
+  - logs user name / ID
+  - logs request x-forwarded-for
+
+### Changes
+
+* [tag] bumped. [iglocska]
+
+* [permission limitations] free limitation count when user disabled. [iglocska]
+
+  - Thanks to Elisabeth from BSI for reporting it
+
+* [permission limitations] free limitation count when user disabled. [iglocska]
+
+### Fix
+
+* [user add] fixed bug with metafields on new users causing an exception. [iglocska]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+
+## v1.20 (2024-06-07)
+
+### New
+
+* [metafield restrictions] not enforced on a user edit that doesn't change the state of the offending value. [iglocska]
+
+  - if a user is already over the limit of a restriction, they should still be editable
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [encryption keys] listed for orgs / individuals on their respective views, fixes #167. [iglocska]
+
+* [dashboard redirects] to individual models now sort by modified by default. [iglocska]
+
+  - the dashboard shows new entries, it only makes sense to sort the list based on changes
+
+  - also a small fix to not sanitise the index URLs as this will lead to multiple query parameters not working
+
+### Fix
+
+* [alignments] rules relaxed, fixes #164. [iglocska]
+
+  - site admins can add alignments to anyone
+  - org admins can add alignments for their own org members
+  - group admins can add alignments for any of their managed orgs' members
+
+* [authkeys] allow for authkeys with no expiration set, fixes #169. [iglocska]
+
+* [authkey:add] Make sure to default to expiration=0 if not provided. [Sami Mokaddem]
+
+* [encryption keys] allow for large keys. [iglocska]
+
+  - @adulau has a massive... key.
+
+* [setting:cerebrate] Enforce debug setting to be true or false. [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+
 ## v1.19 (2024-05-15)
 
 ### New
