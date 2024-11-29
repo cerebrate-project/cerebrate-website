@@ -1,6 +1,276 @@
 # Changelog
 
 
+## v1.26 (2024-11-28)
+
+### New
+
+* [security] added functionality to tighten bookmark creation rules. [iglocska]
+
+  - site admins can now limit the baseurls of the provided bookmark URLs to a list of values via the server settings
+
+### Changes
+
+* Update VERSION.json. [Andras Iklody]
+
+  Urgency
+
+* [version] bump. [iglocska]
+
+* [internal] authkey adding, more elegant solution. [iglocska]
+
+### Fix
+
+* Migrations not working on install due to debug mode not being boolean. [Jeroen Pinoy]
+
+* Correctly set perm_community_admin value. fix #179. [Jeroen Pinoy]
+
+* Use numeric values within range for debug level setting. [Jeroen Pinoy]
+
+* Fix typo in individuals description. [Jeroen Pinoy]
+
+* Correct description on add brood view. [Jeroen Pinoy]
+
+* [authkeys] better permission / listing handling. [iglocska]
+
+  - allow group admins to manage api keys of their group
+  - when adding an authkey from the user view, don't list every user in the dropdown, focus on the selected user
+
+* [authkeys] don't barf if no valid roles exist. [iglocska]
+
+* [diagnostics] allow for certain settings to be empty, fixes #176. [iglocska]
+
+  - via the empty => true key
+
+* [error handling] better error handling for bookmarks, fixes #188. [iglocska]
+
+  - show why something failed
+  - actually fail if a field is missing for bookmarks
+
+* [error] when deleting a role that had users attached to it was cryptic, fixes #180. [iglocska]
+
+* [security] Group admin ACL. [iglocska]
+
+  - group admin can inject user into organisation not managed by themselves
+
+  - as reported by Jeroen Pinoy (@wachizungu)
+
+* [typo] in the authkeyscontroller. [iglocska]
+
+  - lead to users not being able to generate authkeys
+
+* Default admin role doesn't have group admin and meta field editor permissions. [Jeroen Pinoy]
+
+* [cleanup] ACL component. [iglocska]
+
+  - duplicate check removed
+
+* Set proxy settings diagonistics severity level to info. fix #176. [Jeroen Pinoy]
+
+* Typo in read security allowed bookmark domains config. [Jeroen Pinoy]
+
+* Users settings view throws internal server error when accessed without user id. [Jeroen Pinoy]
+
+* [security] Tightening of the role assignment permissions. [iglocska]
+
+  - If a decoupled perm_admin role was configured on the system, this could be assigned by low privilege administrators, leading to privilege escalation
+  - This fix moves the responsibility of the check to the ACL component rather than the controller
+
+  - As reported by Jeroen Pinoy (@wachizungu)
+
+* [crud] fixed the broken non ajax messages just introduced in the previous commit. [iglocska]
+
+  - can't have my cake and eat it too
+
+* [message handling] of error messages. [iglocska]
+
+  - correctly handle beforeSave / afterSave failures in ajax contexts
+
+  - until now it was just silently failing giving cryptic messages to the user
+
+* [pgp] key status check fixed for certain edge cases. [iglocska]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* Merge pull request #191 from Wachizungu/revert-debug-setting-value-type. [Andras Iklody]
+
+  fix: migrations not working on install due to debug mode not being bo…
+
+* Merge pull request #182 from Wachizungu/fix-community-admin-role-add. [Andras Iklody]
+
+  fix: correctly set perm_community_admin value. fix #179
+
+* Merge pull request #183 from Wachizungu/fix-debug-setting-warnings. [Andras Iklody]
+
+  fix: use numeric values within range for debug level setting
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge pull request #178 from Wachizungu/fix-typo. [Andras Iklody]
+
+  fix: fix typo in individuals description
+
+* Merge pull request #177 from Wachizungu/fix-brood-add-description. [Andras Iklody]
+
+  fix: Correct description on add brood view
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge pull request #190 from Wachizungu/add-new-roles-to-default-admin-role. [Andras Iklody]
+
+  fix: default admin role doesn't have group admin and meta field edito…
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+* Merge pull request #184 from Wachizungu/fix-proxy-diagnostics-severity-level. [Andras Iklody]
+
+  fix: Set proxy settings diagonistics severity level to info. fix #176
+
+* Merge pull request #187 from Wachizungu/fix-security-allowed-bookmark-domains-read-config. [Andras Iklody]
+
+  fix: typo in read security allowed bookmark domains config
+
+* Merge pull request #189 from Wachizungu/chg-load-current-user-settings-view-in-case-id-unset. [Andras Iklody]
+
+  fix: users settings view throws internal server error when accessed w…
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+
+## v1.25 (2024-09-25)
+
+### New
+
+* [ui] Added country flag in some places. [Sami Mokaddem]
+
+  - Currently in:
+      - /organisations/[index/view]
+      - /users/[index/view]
+
+### Changes
+
+* [docker:readme] Updated PHP version. [Sami Mokaddem]
+
+* [users:add] Update the permission limitation for org permission on /users/add. [Sami Mokaddem]
+
+* [bookmarks] Make the rendering more lenient to malformed content. [iglocska]
+
+  - fail gracefully rather than throwing 500s
+
+### Fix
+
+* [permissionLimitiation:getListOfLimitations] Correctly show the correct amount of limitation. [Sami Mokaddem]
+
+  - Correctly get the number of org permission if the user is an org_group_manager
+  - and one of the org he/she manages doesn't have a user
+
+* [users:index_filtering] Added ACL entries for filtering modal. [Sami Mokaddem]
+
+* [ui:search_all] Fixed dropdown width to avoid screen overflow for large results. [Sami Mokaddem]
+
+  - This will put an end to @gallypette and @adulau's pestering
+
+* [users:edit] DatabaseException in group-admin for condition with empty list of values. [Sami Mokaddem]
+
+* [permissionLimitation:getListOfLimitations] Fixed DatabaseException for condition with empty list of values. [Sami Mokaddem]
+
+* [bookmarks] added more error handling for malformed bookmarks. [iglocska]
+
+### Other
+
+* Merge branch 'develop' [Sami Mokaddem]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* Update README.md. [Andras Iklody]
+
+
+## v1.24 (2024-08-29)
+
+### New
+
+* [version] show the cerebrate version and link to the release notes. [iglocska]
+
+* [meta_field] API improved. [iglocska]
+
+  - simple way to add metafields added
+    - simply pass a list of meta_fields to the object about to be saved
+    - the only fields required are: template_uuid, template_version, field, value
+  Example for an individual:
+
+  ```
+  {
+    "first_name": "Andras",
+    "last_name": "Iklody",
+    "email": "andras.iklody@circl.lu",
+    "alignments": {
+      "organisation": [
+        {
+          "uuid": "9d4d7913-2602-4333-8440-c78b7f92eca3",
+          "name": "Iglocska.eu"
+        }
+      ]
+    },
+    "meta_fields": [
+      {
+        "field": "perm_mattermost",
+        "value": true,
+        "template_uuid": "447ded8b-314b-41c7-a913-4ce32535b28d",
+        "template_version": 2
+      }
+    ]
+  }
+  ```
+
+* [individuals] add individual auto-saves an alignment. [iglocska]
+
+  - if a non community admin enrolls an individual, set the alignment by default
+    - this will prevent them from becoming uneditable
+
+### Fix
+
+* [VERSION] bump. [iglocska]
+
+* [error messages] improved for empty/malformed request bodies. [iglocska]
+
+  - instead of failing on a validation level for empty data, fail immediately on CRUD component level
+    - send a clear message to the user that the request was malformed / the proper media type headers were not set
+
+* [crud] various minor fixes. [iglocska]
+
+* [users] add load individual correctly and show it to the user. [iglocska]
+
+* [CRUD] run afterfind even if no metatemplates set. [iglocska]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+
 ## v1.23 (2024-08-27)
 
 ### New
