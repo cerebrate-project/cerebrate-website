@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v1.27 (2025-03-21)
+
+### New
+
+* [UX] better interlinking of users/individuals. [iglocska]
+
+  - show users of individuals
+  - show individuals of users
+
+### Changes
+
+* [version] bump. [iglocska]
+
+### Fix
+
+* [UX] profile shown on the header bar. [iglocska]
+
+* [group admin] permissions added. [iglocska]
+
+* [user editing] fixed for roles <= community admin, fixes #198. [iglocska]
+
+
 ## v1.26 (2024-11-28)
 
 ### New
