@@ -1,6 +1,74 @@
 # Changelog
 
 
+## v1.28 (2025-08-22)
+
+### New
+
+* [users:bulk-edit] Added option to bulk edit users. [Sami Mokaddem]
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [metatemplate:form] Sort metafield based on their `field` property. [Sami Mokaddem]
+
+### Fix
+
+* [security] ACL for usersettings edit fixed. [iglocska]
+
+  - allowed for the enumeration of usernames
+
+  - as reported by Jeroen Pinoy
+  - Developed during 2025 hackathon.lu
+
+* Add meta field editor permission to role view. fixes #195. [Jeroen Pinoy]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch '205' into develop. [iglocska]
+
+* Fix(validation): prevent RecordNotFoundException on invalid meta_template_field_id. [DocArmoryTech]
+
+  Add existence check before calling `get()` in MetaFieldsTable::isValidMetaField()
+  to avoid unhandled RecordNotFoundException when validating a MetaField that
+  references a missing meta_template_field_id.
+
+  I'm unsure of the ramifications of, and have refrained from, introducing buildRules comparable to other Models:
+  ```php
+
+      public function buildRules(RulesChecker $rules): RulesChecker    {
+          $rules->add($rules->existsIn(['meta_template_id'], 'MetaTemplates'), [
+              'errorField' => 'meta_template_id',
+              'message' => __('The selected meta template does not exist.'),
+          ]);
+
+          $rules->add($rules->existsIn(['meta_template_field_id'], 'MetaTemplateFields'), [
+              'errorField' => 'meta_template_field_id',
+              'message' => __('The selected meta template field does not exist.'),
+          ]);
+
+          $rules->add($rules->existsIn(['meta_template_directory_id'], 'MetaTemplateNameDirectory'), [
+              'errorField' => 'meta_template_directory_id',
+              'message' => __('The selected meta template directory does not exist.'),
+          ]);
+
+          return $rules;
+      }
+
+  ```
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge pull request #196 from Wachizungu/add-meta-editor-permission-to-role-view. [Andras Iklody]
+
+  fix: add meta field editor permission to role view. fixes #195
+
+
 ## v1.27 (2025-03-21)
 
 ### New
