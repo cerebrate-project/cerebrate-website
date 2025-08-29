@@ -1,6 +1,33 @@
 # Changelog
 
 
+## v1.29 (2025-08-29)
+
+### Changes
+
+* [version] bump. [iglocska]
+
+* [users:filtering] Added possibility to filter on user roles. [Sami Mokaddem]
+
+* [users:filtering] Added filtering for disabled/enabled users. [Sami Mokaddem]
+
+* [tags] extend name field to 255 length, matching MISP. [iglocska]
+
+### Fix
+
+* [component:CRUD] Correctly support of negating metafield searches with `!=` [Sami Mokaddem]
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge remote-tracking branch 'origin/develop' into develop. [Sami Mokaddem]
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'develop' of github.com:cerebrate-project/cerebrate into develop. [iglocska]
+
+
 ## v1.28 (2025-08-22)
 
 ### New
