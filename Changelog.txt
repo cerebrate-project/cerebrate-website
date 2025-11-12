@@ -1,6 +1,54 @@
 # Changelog
 
 
+## v1.30 (2025-11-12)
+
+### Changes
+
+* [version] bump. [iglocska]
+
+### Fix
+
+* [security] Privilege escalation. [Sami Mokaddem]
+
+  - As reported by ENISA
+
+* [security] Privilege escalation. [Sami Mokaddem]
+
+  - As reported by ENISA
+
+* [baseurl] fall back to the config.json controlled baseurl if fullbaseurl is not set. [iglocska]
+
+* [ui:select2-in-modal] Attach select2 to the modal's body to enable typing events. [Sami Mokaddem]
+
+  - Not sure why this change was reverted 3 years ago. We'll eventually find out why -_-
+
+* [tagging:restore-tag] Fixed function to restore a deleted tag. [Sami Mokaddem]
+
+  - Functionality was gone after moving from tag name to tag ID for deletion
+
+* [ui:tagging] Avoid z-index issues with modals when using tagging's select2 picker. [Sami Mokaddem]
+
+* [tagging] No double encoding & Removed tags by ID instead of value. [Sami Mokaddem]
+
+  - Double encoding prevented some tags to be saved
+  - Raw tag name used to be encoded in the DOM, which lead to encoding issue
+
+### Other
+
+* Merge branch 'develop' [iglocska]
+
+* Merge branch 'main' into develop. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* Merge branch 'main' of github.com:cerebrate-project/cerebrate. [iglocska]
+
+* [change] corrected sqlite3 dependency. [Sascha Rommelfangen]
+
+* Merge remote-tracking branch 'origin/develop' [Sami Mokaddem]
+
+
 ## v1.29 (2025-08-29)
 
 ### Changes
