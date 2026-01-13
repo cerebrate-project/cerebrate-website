@@ -31,6 +31,9 @@ We firmly believe that, even though unfortunately it is often not regarded as co
 - [CVE-2023-26468](https://cvepremium.circl.lu/cve/CVE-2023-26468) <= Cerebrate 1.12
 - [CVE-2023-28883](https://cvepremium.circl.lu/cve/CVE-2023-28883) -  In Cerebrate 1.13, a blind SQL injection exists in the searchAll API endpoint. 
 - [CVE-2023-41363](https://cvepremium.circl.lu/cve/CVE-2023-41363) <= Cerebrate 1.14 - In Cerebrate 1.14, a vulnerability in UserSettingsController allows authenticated users to change user settings of other users.  
+- [GCVE-1-2026-0004](https://vulnerability.circl.lu/vuln/gcve-1-2026-0004) < Cerebrate 1.31 - Authorization Bypass in Cerebrate IndividualsController Edit Function
+- [GCVE-1-2026-0005](https://vulnerability.circl.lu/vuln/gcve-1-2026-0005) < Cerebrate 1.31 - Improper Access Control in Cerebrate Alignment Model Allows Mass Assignment of Sensitive Fields
+- [GCVE-1-2026-0006](https://vulnerability.circl.lu/vuln/gcve-1-2026-0006) < Cerebrate 1.31 - Improper Access Control in Cerebrate AuthKey and EncryptionKey Entities Allows Modification of Sensitive Fields
 
 ## PGP key
 
